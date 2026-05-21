@@ -109,8 +109,14 @@ nav{position:sticky;top:0;z-index:300;background:rgba(255,255,255,0.97);backdrop
 .product-wrap{position:relative;z-index:10;animation:productFloat 5s ease infinite;}
 @keyframes productFloat{0%,100%{transform:translateY(0) rotateY(-4deg);}50%{transform:translateY(-14px) rotateY(4deg);}}
 .product-img{width:260px;height:auto;filter:drop-shadow(0 40px 60px rgba(0,0,0,.7)) drop-shadow(0 0 40px rgba(0,194,255,.3));image-rendering:auto;}
-/* Light sweep overlay on image */
-.product-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.18) 0%,transparent 40%,transparent 70%,rgba(0,194,255,.08) 100%);border-radius:4px;pointer-events:none;mix-blend-mode:overlay;}
+/* 360 Viewer */
+.viewer-360{position:relative;z-index:10;cursor:grab;user-select:none;-webkit-user-select:none;}
+.viewer-360:active{cursor:grabbing;}
+#canvas360{display:block;filter:drop-shadow(0 40px 70px rgba(0,0,0,.75)) drop-shadow(0 0 50px rgba(0,194,255,.35));border-radius:4px;animation:productFloat 5s ease infinite;}
+@keyframes productFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.viewer-hint{position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.5);font-size:.74rem;white-space:nowrap;letter-spacing:.5px;animation:fadeHint 3s ease 2s both;}
+@keyframes fadeHint{from{opacity:1;}to{opacity:0;pointer-events:none;}}
+.viewer-angle{position:absolute;top:12px;right:12px;background:rgba(0,194,255,.15);border:1px solid rgba(0,194,255,.3);color:var(--accent);font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:99px;letter-spacing:1px;font-family:monospace;}
 /* Scroll hint */
 .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.35);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;}
 .scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.35));animation:scrollLine 2s ease infinite;}
@@ -151,31 +157,32 @@ nav{position:sticky;top:0;z-index:300;background:rgba(255,255,255,0.97);backdrop
 .wide-inner{display:grid;grid-template-columns:1fr 200px;gap:24px;align-items:center;height:100%;}
 
 /* ===== COMPARISON TABLE ===== */
-.compare-section{background:var(--gray-100);padding:100px 40px;}
-.cs-inner{max-width:1280px;margin:0 auto;}
-.compare-wrap{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow-x:auto;border:1px solid var(--gray-200);}
-table{width:100%;border-collapse:collapse;min-width:960px;}
+.compare-section{background:var(--gray-100);padding:100px 0;}
+.cs-inner{max-width:100%;padding:0 24px;}
+.cs-heading{max-width:1100px;margin:0 auto;padding:0 16px;}
+.compare-wrap{background:#fff;border-radius:0;box-shadow:var(--shadow-lg);overflow-x:visible;border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);}
+table{width:100%;border-collapse:collapse;table-layout:fixed;}
 thead tr{background:var(--blue-dark);}
 thead th{padding:0;position:relative;}
-.th-inner{padding:22px 14px 24px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;}
-.th-name{font-size:.88rem;font-weight:800;color:#fff;line-height:1.2;}
-.th-price{font-size:.72rem;color:rgba(255,255,255,.55);}
-.th-badge{font-size:.58rem;font-weight:800;padding:3px 9px;border-radius:99px;letter-spacing:.4px;}
-thead th:first-child{background:#002266;text-align:left;}
-.th-fh{padding:20px 26px;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.3px;}
+.th-inner{padding:18px 4px 20px;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;}
+.th-name{font-size:.76rem;font-weight:800;color:#fff;line-height:1.2;}
+.th-price{font-size:.65rem;color:rgba(255,255,255,.55);}
+.th-badge{font-size:.55rem;font-weight:800;padding:2px 6px;border-radius:99px;letter-spacing:.3px;}
+thead th:first-child{background:#002266;text-align:left;width:13%;}
+.th-fh{padding:18px 12px;font-size:.76rem;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.2px;}
 .popular-col{background:rgba(0,194,255,.08)!important;position:relative;}
 .popular-col::after{content:"";position:absolute;inset:0;border-left:2px solid var(--accent);border-right:2px solid var(--accent);pointer-events:none;}
 thead .popular-col{background:#004DB8!important;}
-thead .popular-col::before{content:"★ POPULAR";position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-50%);background:var(--accent);color:var(--blue-dark);font-size:.57rem;font-weight:800;padding:3px 11px;border-radius:99px;white-space:nowrap;letter-spacing:.5px;}
+thead .popular-col::before{content:"★ POPULAR";position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-50%);background:var(--accent);color:var(--blue-dark);font-size:.54rem;font-weight:800;padding:3px 8px;border-radius:99px;white-space:nowrap;letter-spacing:.3px;}
 tbody tr{border-bottom:1px solid var(--gray-200);transition:background .15s;}
 tbody tr:hover{background:var(--blue-light);}
-tr.gh td{background:#f0f4fa;padding:10px 26px;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);border-bottom:1px solid var(--gray-200)!important;}
-tbody td{padding:13px 14px;font-size:.84rem;text-align:center;color:var(--text);vertical-align:middle;}
-tbody td:first-child{text-align:left;padding-left:26px;font-weight:500;color:var(--gray-700);min-width:165px;}
-.ck{color:#16a34a;font-size:1.1rem;font-weight:700;}
+tr.gh td{background:#f0f4fa;padding:9px 12px;font-size:.64rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--blue);border-bottom:1px solid var(--gray-200)!important;}
+tbody td{padding:10px 4px;font-size:.76rem;text-align:center;color:var(--text);vertical-align:middle;}
+tbody td:first-child{text-align:left;padding-left:12px;font-weight:500;color:var(--gray-700);font-size:.76rem;line-height:1.35;}
+.ck{color:#16a34a;font-size:1rem;font-weight:700;}
 .cx{color:#cbd5e1;}
-tr.ctar td{padding:20px 14px;border-bottom:none;}
-.cta-btn{display:inline-block;background:var(--blue);color:#fff;padding:10px 16px;border-radius:99px;font-size:.78rem;font-weight:700;text-decoration:none;transition:.2s;white-space:nowrap;}
+tr.ctar td{padding:16px 4px;border-bottom:none;}
+.cta-btn{display:inline-block;background:var(--blue);color:#fff;padding:7px 10px;border-radius:99px;font-size:.68rem;font-weight:700;text-decoration:none;transition:.2s;white-space:nowrap;}
 .cta-btn:hover{background:var(--blue-dark);transform:translateY(-1px);}
 .cta-btn.acc{background:var(--accent);color:var(--blue-dark);box-shadow:0 4px 14px rgba(0,194,255,.35);}
 
@@ -227,7 +234,8 @@ footer a{color:var(--accent);text-decoration:none;}
 }
 @media(max-width:700px){
   .hero-inner{padding:80px 20px 60px;}
-  .features-section,.compare-section,.why-section{padding:64px 20px;}
+  .features-section,.why-section{padding:64px 20px;}
+  .compare-section{padding:64px 0;}
   .feat-badge{display:none;}
 }
 </style>
@@ -313,13 +321,14 @@ footer a{color:var(--accent);text-decoration:none;}
           <div class="fb-icon">&#128100;</div>
           <div class="fb-txt"><strong>Child Lock</strong><span>Keselamatan bayi</span></div>
         </div>
-        <!-- REAL PRODUCT IMAGE from SK Magic website -->
-        <div class="product-wrap">
-          <img class="product-img"
-            src="https://skmagicmy.com/wp-content/uploads/2018/12/large_wpua400fmywh_01.png"
-            alt="SK Magic JIKSOO RAPI Water Purifier"
-            onerror="this.src='https://skmagicofficial.my/cdn/shop/files/SKM_RIA_product_main.png?v=1';this.onerror=function(){this.src='https://via.placeholder.com/260x480/001540/00C2FF?text=SK+Magic+JIKSOO+RIA'}"
-          >
+        <!-- 360 PRODUCT VIEWER -->
+        <div class="viewer-360" id="viewer360">
+          <canvas id="canvas360" width="320" height="520"></canvas>
+          <div class="viewer-hint" id="viewerHint">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8"/><polyline points="16 12 12 16 8 12"/></svg>
+            <span>Drag untuk putar 360°</span>
+          </div>
+          <div class="viewer-angle" id="viewerAngle">0°</div>
         </div>
         <!-- Floor reflection -->
         <div class="floor-reflection"></div>
@@ -398,12 +407,12 @@ footer a{color:var(--accent);text-decoration:none;}
 
 <!-- COMPARISON TABLE -->
 <div class="compare-section" id="bandingkan">
+  <div class="cs-heading reveal" style="text-align:center;padding:0 24px 56px;">
+    <p class="section-eyebrow">Perbandingan Model</p>
+    <h2 class="section-title">Pilih Penapis Air <span>SK Magic</span><br>Yang Sesuai Untuk Anda</h2>
+    <p class="section-sub" style="margin-bottom:0;">8 model tersedia untuk setiap keperluan dan bajet. Bandingkan dan pilih yang terbaik.</p>
+  </div>
   <div class="cs-inner">
-    <div class="reveal">
-      <p class="section-eyebrow">Perbandingan Model</p>
-      <h2 class="section-title">Pilih Penapis Air <span>SK Magic</span><br>Yang Sesuai Untuk Anda</h2>
-      <p class="section-sub">8 model tersedia untuk setiap keperluan dan bajet. Bandingkan dan pilih yang terbaik.</p>
-    </div>
     <div class="compare-wrap reveal">
       <table>
         <thead>
@@ -440,14 +449,14 @@ footer a{color:var(--accent);text-decoration:none;}
           <tr class="gh"><td colspan="9">&#128106; Paling Sesuai Untuk</td></tr>
           <tr>
             <td>Sesuai Untuk</td>
-            <td class="popular-col" style="font-size:.77rem;color:#0057B8;font-weight:700;">Keluarga baru / Budget bijak</td>
-            <td style="font-size:.77rem;">Keluarga ramai / Lebih suhu</td>
-            <td style="font-size:.77rem;">Peminat ais &amp; premium</td>
-            <td style="font-size:.77rem;">Pengguna aktif / Office</td>
-            <td style="font-size:.77rem;">Dapur kecil / Sewa</td>
-            <td style="font-size:.77rem;">Ruang luas / Standing</td>
-            <td style="font-size:.77rem;">Studio / Bilik</td>
-            <td style="font-size:.77rem;">Studio / Hadiah</td>
+            <td class="popular-col" style="font-size:.70rem;color:#0057B8;font-weight:700;">Keluarga baru / Budget bijak</td>
+            <td style="font-size:.70rem;">Keluarga ramai / Lebih suhu</td>
+            <td style="font-size:.70rem;">Peminat ais &amp; premium</td>
+            <td style="font-size:.70rem;">Pengguna aktif / Office</td>
+            <td style="font-size:.70rem;">Dapur kecil / Sewa</td>
+            <td style="font-size:.70rem;">Ruang luas / Standing</td>
+            <td style="font-size:.70rem;">Studio / Bilik</td>
+            <td style="font-size:.70rem;">Studio / Hadiah</td>
           </tr>
           <tr class="ctar">
             <td style="font-weight:800;font-size:.84rem;color:#0057B8;">&#128242; Tanya Agen</td>
@@ -463,7 +472,7 @@ footer a{color:var(--accent);text-decoration:none;}
         </tbody>
       </table>
     </div>
-    <p style="text-align:center;font-size:.77rem;color:#94A3B8;margin-top:18px;">* Harga sewa anggaran promosi semasa. Hubungi agen untuk harga terkini dan pakej terbaik.</p>
+    <p style="text-align:center;font-size:.76rem;color:#94A3B8;margin-top:18px;padding:0 24px;">* Harga sewa anggaran promosi semasa. Hubungi agen untuk harga terkini dan pakej terbaik.</p>
   </div>
 </div>
 
@@ -504,36 +513,265 @@ footer a{color:var(--accent);text-decoration:none;}
 <a href="https://wa.me/60123456789?text=Saya%20nak%20tanya%20tentang%20SK%20Magic" class="wa-float">&#128172;</a>
 
 <script>
-// Generate floating particles
+// ===== FLOATING PARTICLES =====
 (function(){
-  var container=document.getElementById("particles");
-  var colors=["rgba(0,194,255,",  "rgba(0,87,184,", "rgba(100,200,255,"];
+  var c=document.getElementById("particles");
+  var cols=["rgba(0,194,255,","rgba(0,87,184,","rgba(100,200,255,"];
   for(var i=0;i<35;i++){
-    var p=document.createElement("div");
-    p.className="particle";
-    var size=2+Math.random()*5;
-    var col=colors[Math.floor(Math.random()*colors.length)];
-    p.style.cssText=[
-      "width:"+size+"px","height:"+size+"px",
-      "left:"+Math.random()*100+"%",
-      "background:"+col+(0.2+Math.random()*0.5)+")",
-      "animation-duration:"+(8+Math.random()*14)+"s",
-      "animation-delay:"+(Math.random()*14)+"s"
-    ].join(";");
-    container.appendChild(p);
+    var p=document.createElement("div");p.className="particle";
+    var s=2+Math.random()*5,col=cols[Math.floor(Math.random()*cols.length)];
+    p.style.cssText="width:"+s+"px;height:"+s+"px;left:"+Math.random()*100+"%;background:"+col+(0.2+Math.random()*0.5)+");animation-duration:"+(8+Math.random()*14)+"s;animation-delay:"+(Math.random()*14)+"s";
+    c.appendChild(p);
   }
 })();
 
-// Scroll reveal
+// ===== 360° PRODUCT VIEWER =====
+(function(){
+  var canvas=document.getElementById("canvas360");
+  var ctx=canvas.getContext("2d");
+  var W=canvas.width,H=canvas.height;
+
+  // The real product image URL
+  var IMG_URL="https://skmagicmy.com/wp-content/uploads/2018/12/large_wpua400fmywh_01.png";
+  var img=new Image();
+  img.crossOrigin="anonymous";
+
+  // Angle state
+  var angle=0;          // degrees 0-359
+  var targetAngle=0;
+  var spinning=false;
+  var lastX=null;
+  var velocity=0;
+  var isDragging=false;
+  var autoSpin=true;
+  var autoTimer=null;
+  var loaded=false;
+  var frameId=null;
+
+  // Draw frame
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    if(!loaded) return;
+
+    var a=angle % 360;
+    if(a<0) a+=360;
+
+    // Perspective: map angle to scaleX + skew
+    // 0°   = front   (full width, no skew)
+    // 90°  = right side (slim, skewed left)
+    // 180° = back    (full width, slightly different shade)
+    // 270° = left side (slim, skewed right)
+
+    var rad=a*Math.PI/180;
+
+    // scaleX: how wide the product appears (cos gives front=1, side=0)
+    var cosA=Math.cos(rad);
+    var scaleX=Math.abs(cosA);
+    // minimum width so it doesn't fully collapse
+    var minScale=0.06;
+    if(scaleX<minScale) scaleX=minScale;
+
+    // Brightness: front brightest, back slightly darker, sides darker
+    var brightness;
+    if(a<90){        brightness=1.0-a/90*0.35;}
+    else if(a<180){  brightness=0.65+(a-90)/90*0.1;}
+    else if(a<270){  brightness=0.75-(a-180)/90*0.35;}
+    else{            brightness=0.40+(a-270)/90*0.60;}
+
+    // Edge highlight: sides get a thin light strip
+    var showEdge=(scaleX<0.3);
+
+    // Draw shadow under product
+    ctx.save();
+    ctx.translate(W/2,H-30);
+    ctx.scale(scaleX,1);
+    var shadowGrad=ctx.createRadialGradient(0,0,10,0,0,110);
+    shadowGrad.addColorStop(0,"rgba(0,194,255,0.22)");
+    shadowGrad.addColorStop(1,"transparent");
+    ctx.fillStyle=shadowGrad;
+    ctx.beginPath();ctx.ellipse(0,0,110,22,0,0,Math.PI*2);ctx.fill();
+    ctx.restore();
+
+    // ---- Draw product image with perspective ----
+    var imgDrawW=220;
+    var imgDrawH=440;
+    var drawW=imgDrawW*scaleX;
+    var drawX=(W-drawW)/2;
+    var drawY=(H-imgDrawH)/2-10;
+
+    ctx.save();
+    // Brightness filter via globalAlpha + overlay
+    ctx.globalAlpha=1;
+
+    // Clipping to product bounds
+    ctx.beginPath();
+    ctx.rect(drawX,drawY,drawW,imgDrawH);
+    ctx.clip();
+
+    // Draw image stretched horizontally
+    ctx.drawImage(img,drawX,drawY,drawW,imgDrawH);
+
+    // Brightness overlay (darken sides & back)
+    if(brightness<1){
+      ctx.globalAlpha=1-brightness;
+      ctx.fillStyle="rgba(0,5,20,"+(1-brightness)+")";
+      ctx.fillRect(drawX,drawY,drawW,imgDrawH);
+      ctx.globalAlpha=1;
+    }
+
+    // Edge highlight strip
+    if(showEdge){
+      var edgeGrad;
+      if(cosA>0){
+        // rotating right, left edge lit
+        edgeGrad=ctx.createLinearGradient(drawX,0,drawX+Math.min(drawW,16),0);
+      } else {
+        edgeGrad=ctx.createLinearGradient(drawX+drawW,0,drawX+drawW-Math.min(drawW,16),0);
+      }
+      edgeGrad.addColorStop(0,"rgba(200,230,255,0.35)");
+      edgeGrad.addColorStop(1,"transparent");
+      ctx.fillStyle=edgeGrad;
+      ctx.fillRect(drawX,drawY,drawW,imgDrawH);
+    }
+
+    // Front shine (only when near front/back)
+    if(scaleX>0.7){
+      var shineAlpha=(scaleX-0.7)/0.3*0.18;
+      var shineGrad=ctx.createLinearGradient(drawX,drawY,drawX+drawW*0.4,drawY+imgDrawH*0.5);
+      shineGrad.addColorStop(0,"rgba(255,255,255,"+shineAlpha+")");
+      shineGrad.addColorStop(1,"transparent");
+      ctx.fillStyle=shineGrad;
+      ctx.fillRect(drawX,drawY,drawW,imgDrawH);
+    }
+
+    ctx.restore();
+
+    // Blue glow aura around product
+    ctx.save();
+    var glowAlpha=0.10+Math.abs(Math.sin(Date.now()/1800))*0.06;
+    var glowGrad=ctx.createRadialGradient(W/2,H/2-10,drawW*0.3,W/2,H/2-10,drawW*1.8);
+    glowGrad.addColorStop(0,"rgba(0,194,255,"+glowAlpha+")");
+    glowGrad.addColorStop(1,"transparent");
+    ctx.globalCompositeOperation="source-over";
+    ctx.fillStyle=glowGrad;
+    ctx.fillRect(0,0,W,H);
+    ctx.restore();
+
+    // Update angle display
+    var degEl=document.getElementById("viewerAngle");
+    if(degEl) degEl.textContent=Math.round(a)+"°";
+  }
+
+  function loop(){
+    // Inertia
+    if(!isDragging){
+      angle+=velocity;
+      velocity*=0.93;
+      if(Math.abs(velocity)<0.05) velocity=0;
+    }
+    // Auto-spin when idle
+    if(autoSpin && !isDragging && Math.abs(velocity)<0.1){
+      angle+=0.4;
+    }
+    draw();
+    frameId=requestAnimationFrame(loop);
+  }
+
+  // Load image
+  img.onload=function(){
+    loaded=true;
+    loop();
+  };
+  img.onerror=function(){
+    // fallback: draw a styled rectangle to represent product
+    loaded=true;
+    // override draw to use rectangle
+    var origDraw=draw;
+    draw=function(){
+      ctx.clearRect(0,0,W,H);
+      var a=angle%360; if(a<0)a+=360;
+      var rad=a*Math.PI/180;
+      var cosA=Math.cos(rad);
+      var scaleX=Math.max(Math.abs(cosA),0.06);
+      var drawW=180*scaleX;
+      var drawH=400;
+      var drawX=(W-drawW)/2;
+      var drawY=(H-drawH)/2;
+      // shadow
+      ctx.save();ctx.translate(W/2,H-25);ctx.scale(scaleX,1);
+      var sg=ctx.createRadialGradient(0,0,10,0,0,100);
+      sg.addColorStop(0,"rgba(0,194,255,0.2)");sg.addColorStop(1,"transparent");
+      ctx.fillStyle=sg;ctx.beginPath();ctx.ellipse(0,0,100,18,0,0,Math.PI*2);ctx.fill();ctx.restore();
+      // body gradient
+      var bg=ctx.createLinearGradient(drawX,0,drawX+drawW,0);
+      if(cosA>=0){bg.addColorStop(0,"#b8cce0");bg.addColorStop(0.4,"#ddeaf5");bg.addColorStop(1,"#8899aa");}
+      else{bg.addColorStop(0,"#8899aa");bg.addColorStop(0.6,"#ddeaf5");bg.addColorStop(1,"#b8cce0");}
+      ctx.fillStyle=bg;
+      ctx.beginPath();
+      var r=Math.min(12*scaleX,10);
+      ctx.roundRect(drawX,drawY,drawW,drawH,r);
+      ctx.fill();
+      // LED strip
+      ctx.fillStyle="rgba(0,194,255,0.8)";
+      ctx.fillRect(drawX+drawW*0.1,drawY+drawH*0.25,drawW*0.8,3);
+      ctx.fillRect(drawX+drawW*0.1,drawY+drawH*0.55,drawW*0.8,3);
+      // screen
+      ctx.fillStyle="rgba(0,30,80,0.8)";
+      ctx.beginPath();ctx.roundRect(drawX+drawW*0.1,drawY+drawH*0.28,drawW*0.8,drawH*0.25,4);ctx.fill();
+      ctx.fillStyle="rgba(0,194,255,0.6)";
+      for(var i=0;i<3;i++){ctx.fillRect(drawX+drawW*0.15,drawY+drawH*0.32+i*0.06*drawH,drawW*0.7,2);}
+      // label
+      ctx.fillStyle="rgba(255,255,255,0.7)";ctx.font="bold "+(12*scaleX)+"px Outfit,sans-serif";
+      ctx.textAlign="center";ctx.fillText("SK Magic",W/2,drawY+drawH*0.12);
+      var degEl=document.getElementById("viewerAngle");
+      if(degEl) degEl.textContent=Math.round(a)+"°";
+    };
+    loop();
+  };
+  img.src=IMG_URL;
+
+  // ===== DRAG INTERACTION =====
+  var viewer=document.getElementById("viewer360");
+
+  function startDrag(x){
+    isDragging=true;autoSpin=false;lastX=x;velocity=0;
+    clearTimeout(autoTimer);
+    viewer.style.animationPlayState="paused";
+  }
+  function moveDrag(x){
+    if(!isDragging) return;
+    var dx=x-lastX;
+    angle+=dx*0.55;
+    velocity=dx*0.55;
+    lastX=x;
+  }
+  function endDrag(){
+    isDragging=false;
+    autoTimer=setTimeout(function(){autoSpin=true;},3500);
+  }
+
+  // Mouse
+  viewer.addEventListener("mousedown",function(e){startDrag(e.clientX);});
+  window.addEventListener("mousemove",function(e){moveDrag(e.clientX);});
+  window.addEventListener("mouseup",endDrag);
+  // Touch
+  viewer.addEventListener("touchstart",function(e){e.preventDefault();startDrag(e.touches[0].clientX);},{passive:false});
+  window.addEventListener("touchmove",function(e){if(isDragging){e.preventDefault();moveDrag(e.touches[0].clientX);}},{passive:false});
+  window.addEventListener("touchend",endDrag);
+
+  // Auto-spin pause on hover
+  viewer.addEventListener("mouseenter",function(){if(!isDragging){autoSpin=false;}});
+  viewer.addEventListener("mouseleave",function(){if(!isDragging){autoTimer=setTimeout(function(){autoSpin=true;},1000);}});
+})();
+
+// ===== SCROLL REVEAL =====
 var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e,i){
-    if(e.isIntersecting) setTimeout(function(){e.target.classList.add("visible");},i*110);
-  });
+  entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add("visible");},i*110);});
 },{threshold:.1});
 document.querySelectorAll(".reveal").forEach(function(el){obs.observe(el);});
 
 // Smooth scroll
-document.querySelectorAll("a[href^=\"#\"]").forEach(function(a){
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener("click",function(e){
     e.preventDefault();
     var t=document.querySelector(a.getAttribute("href"));
