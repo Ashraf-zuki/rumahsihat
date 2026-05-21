@@ -3,532 +3,541 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SK Magic Penapis Air — Agen Rasmi</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<title>SK Magic JIKSOO RIA — Agen Rasmi Malaysia</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--blue:#0057B8;--blue-dark:#003D8A;--blue-light:#E8F1FD;--accent:#00C2FF;--gold:#FFB800;--gray-50:#F8FAFC;--gray-100:#F1F5F9;--gray-200:#E2E8F0;--gray-700:#334155;--gray-900:#0F172A;--text:#1E293B;--radius:16px;--shadow-lg:0 12px 48px rgba(0,87,184,0.18);}
+:root{
+  --blue:#0057B8;--blue-dark:#003D8A;--blue-light:#E8F1FD;
+  --accent:#00C2FF;--gold:#FFB800;--green:#00D97E;
+  --gray-100:#F1F5F9;--gray-200:#E2E8F0;--gray-700:#334155;--gray-900:#0F172A;
+  --text:#1E293B;--radius:16px;
+  --shadow-lg:0 16px 56px rgba(0,87,184,0.18);
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--text);overflow-x:hidden;}
-nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;padding:0 36px;height:64px;box-shadow:0 2px 12px rgba(0,87,184,0.07);}
-.nav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;color:var(--blue-dark);}
-.nav-brand .dot{width:10px;height:10px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(1.3);}}
-.nav-tag{background:var(--blue);color:#fff;font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:99px;}
-.nav-cta{background:var(--blue);color:#fff;border:none;padding:10px 22px;border-radius:99px;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;}
-/* HERO */
-.hero{position:relative;height:92vh;min-height:580px;overflow:hidden;background:#00091f;}
-#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
-.hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(100deg,rgba(0,9,31,0.88) 0%,rgba(0,25,70,0.55) 55%,transparent 100%);}
-.hero-content{position:absolute;inset:0;z-index:3;display:flex;align-items:center;padding:0 80px;}
-.hero-text{max-width:560px;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,184,0,.15);border:1px solid var(--gold);color:var(--gold);font-size:.76rem;font-weight:700;padding:6px 16px;border-radius:99px;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px;animation:fadeUp .7s .1s both;}
-.hero-title{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;color:#fff;line-height:1.08;letter-spacing:-1.5px;margin-bottom:18px;animation:fadeUp .7s .2s both;}
-.hero-title span{color:var(--accent);}
-.hero-desc{font-size:1.02rem;color:rgba(255,255,255,.78);line-height:1.65;margin-bottom:36px;animation:fadeUp .7s .3s both;}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s .4s both;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
-.btn-primary{background:var(--accent);color:var(--blue-dark);padding:14px 30px;border-radius:99px;font-weight:700;font-size:.95rem;text-decoration:none;transition:.2s;box-shadow:0 4px 20px rgba(0,194,255,.4);}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,194,255,.55);}
-.btn-outline{border:2px solid rgba(255,255,255,.45);color:#fff;padding:14px 30px;border-radius:99px;font-weight:600;font-size:.95rem;text-decoration:none;}
-.hero-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:4;color:rgba(255,255,255,.4);font-size:.72rem;display:flex;flex-direction:column;align-items:center;gap:6px;letter-spacing:1px;}
-.scroll-arr{width:18px;height:18px;border-right:2px solid rgba(255,255,255,.35);border-bottom:2px solid rgba(255,255,255,.35);transform:rotate(45deg);animation:sb 1.5s infinite;}
-@keyframes sb{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(5px);}}
-/* STATS */
-.stats-strip{background:var(--blue-dark);display:flex;justify-content:center;flex-wrap:wrap;}
-.stat-item{flex:1;min-width:150px;display:flex;flex-direction:column;align-items:center;padding:20px 14px;border-right:1px solid rgba(255,255,255,.1);text-align:center;}
-.stat-item:last-child{border-right:none;}
-.stat-num{font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;}
-.stat-label{font-size:.74rem;color:rgba(255,255,255,.6);margin-top:4px;}
-/* SHOWCASE */
-.showcase-section{background:linear-gradient(160deg,#00091f 0%,#001540 60%,#002060 100%);padding:90px 40px;position:relative;overflow:hidden;}
-.showcase-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,rgba(0,194,255,.07),transparent 70%);}
-.showcase-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 480px;gap:60px;align-items:center;position:relative;z-index:2;}
-.showcase-text .sl{font-size:.74rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
-.showcase-text h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-1px;margin-bottom:18px;}
-.showcase-text h2 span{color:var(--accent);}
-.showcase-text p{font-size:.95rem;color:rgba(255,255,255,.62);line-height:1.7;margin-bottom:32px;}
-.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
-.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.25);color:rgba(255,255,255,.85);font-size:.8rem;padding:7px 14px;border-radius:99px;}
-.pill-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
-#mcw{position:relative;width:100%;height:480px;cursor:grab;border-radius:24px;overflow:hidden;background:radial-gradient(ellipse at 50% 60%,rgba(0,87,184,.15),transparent 70%);}
-#mcw:active{cursor:grabbing;}
-#model-canvas{width:100%;height:100%;display:block;}
-.model-label{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,20,60,.75);backdrop-filter:blur(8px);border:1px solid rgba(0,194,255,.2);color:rgba(255,255,255,.65);font-size:.72rem;padding:6px 16px;border-radius:99px;white-space:nowrap;pointer-events:none;}
-.model-controls{display:flex;justify-content:center;gap:12px;margin-top:14px;}
-.model-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:.78rem;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:99px;cursor:pointer;transition:.2s;}
-.model-btn:hover,.model-btn.active{background:var(--accent);color:var(--blue-dark);border-color:var(--accent);}
-/* TABLE */
-.compare-section{padding:90px 32px;max-width:1280px;margin:0 auto;}
-.section-label{text-align:center;font-size:.74rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
-.section-title{text-align:center;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;color:var(--gray-900);letter-spacing:-.8px;margin-bottom:12px;line-height:1.2;}
+html{scroll-behavior:smooth;}
+body{font-family:"Outfit",sans-serif;background:#fff;color:var(--text);overflow-x:hidden;}
+
+/* ===== NAV ===== */
+nav{position:sticky;top:0;z-index:300;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:66px;box-shadow:0 2px 16px rgba(0,87,184,0.07);}
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.3rem;color:var(--blue-dark);letter-spacing:-.5px;}
+.nav-dot{width:10px;height:10px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
+.nav-pills{display:flex;gap:8px;}
+.nav-pill{font-size:.72rem;font-weight:600;padding:5px 13px;border-radius:99px;letter-spacing:.3px;}
+.np-blue{background:var(--blue);color:#fff;}
+.np-outline{border:1.5px solid var(--gray-200);color:var(--gray-700);}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 22px;border-radius:99px;font-family:inherit;font-size:.85rem;font-weight:700;text-decoration:none;transition:.2s;box-shadow:0 4px 14px rgba(0,87,184,.25);}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px);}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:96vh;display:flex;align-items:center;overflow:hidden;background:#00071a;}
+/* Animated gradient mesh background */
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 80% 70% at 75% 50%,rgba(0,87,184,.55) 0%,transparent 65%),
+  radial-gradient(ellipse 50% 60% at 20% 80%,rgba(0,194,255,.18) 0%,transparent 60%),
+  radial-gradient(ellipse 40% 40% at 90% 10%,rgba(0,57,120,.4) 0%,transparent 60%),
+  linear-gradient(160deg,#00071a 0%,#001540 50%,#002060 100%);}
+/* Moving bokeh lights */
+.bokeh{position:absolute;border-radius:50%;filter:blur(60px);animation:drift linear infinite;}
+.b1{width:400px;height:400px;background:rgba(0,87,184,.22);top:-100px;right:5%;animation-duration:18s;}
+.b2{width:300px;height:300px;background:rgba(0,194,255,.15);bottom:10%;left:10%;animation-duration:14s;animation-delay:-7s;}
+.b3{width:200px;height:200px;background:rgba(0,120,220,.2);top:30%;right:35%;animation-duration:22s;animation-delay:-11s;}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.05);}66%{transform:translate(-20px,15px) scale(.95);}}
+
+/* Floating particles */
+.particles{position:absolute;inset:0;z-index:1;overflow:hidden;}
+.particle{position:absolute;border-radius:50%;animation:floatUp linear infinite;}
+@keyframes floatUp{from{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:1;}90%{opacity:.5;}to{transform:translateY(-10vh) scale(1);opacity:0;}}
+
+/* Grid lines overlay */
+.hero-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(0,194,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.04) 1px,transparent 1px);background-size:60px 60px;}
+
+/* Hero layout */
+.hero-inner{position:relative;z-index:10;max-width:1280px;margin:0 auto;width:100%;padding:80px 60px;display:grid;grid-template-columns:1fr 520px;gap:0;align-items:center;min-height:96vh;}
+
+/* LEFT text */
+.hero-left{}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,184,0,.12);border:1px solid rgba(255,184,0,.4);color:var(--gold);font-size:.76rem;font-weight:700;padding:7px 16px;border-radius:99px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .8s .1s both;}
+.hero-title{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-2px;margin-bottom:10px;animation:fadeUp .8s .2s both;}
+.hero-title .t-blue{color:var(--accent);}
+.hero-title .t-thin{font-weight:300;color:rgba(255,255,255,.6);}
+.hero-model{font-size:clamp(1rem,2.5vw,1.4rem);font-weight:500;color:rgba(255,255,255,.45);letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .8s .25s both;}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,.68);line-height:1.7;margin-bottom:36px;max-width:480px;animation:fadeUp .8s .3s both;}
+/* Key specs chips */
+.specs-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;animation:fadeUp .8s .35s both;}
+.spec-chip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:8px 16px;font-size:.8rem;color:rgba(255,255,255,.8);}
+.spec-chip .ic{font-size:1rem;}
+/* Pricing */
+.price-block{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;animation:fadeUp .8s .38s both;}
+.price-main{font-size:3rem;font-weight:900;color:#fff;letter-spacing:-2px;}
+.price-unit{font-size:1rem;color:rgba(255,255,255,.5);font-weight:400;}
+.price-note{font-size:.82rem;color:rgba(255,255,255,.45);margin-bottom:32px;animation:fadeUp .8s .4s both;}
+/* Buttons */
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .44s both;}
+.btn-wa{display:inline-flex;align-items:center;gap:9px;background:#25D366;color:#fff;padding:15px 28px;border-radius:99px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.35);transition:.2s;}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,211,102,.5);}
+.btn-sec{display:inline-flex;align-items:center;gap:9px;border:2px solid rgba(0,194,255,.4);color:var(--accent);padding:15px 28px;border-radius:99px;font-weight:600;font-size:.95rem;text-decoration:none;transition:.2s;}
+.btn-sec:hover{border-color:var(--accent);background:rgba(0,194,255,.07);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* RIGHT — 3D Product Viewer */
+.hero-right{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+/* Outer glow ring */
+.product-stage{position:relative;width:460px;height:540px;display:flex;align-items:center;justify-content:center;}
+.stage-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 60%,rgba(0,194,255,.22) 0%,transparent 70%);border-radius:50%;animation:glowPulse 3s ease infinite;}
+@keyframes glowPulse{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.06);}}
+/* Reflection floor ellipse */
+.floor-reflection{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:260px;height:40px;background:radial-gradient(ellipse,rgba(0,194,255,.25) 0%,transparent 70%);filter:blur(8px);animation:glowPulse 3s ease infinite;}
+/* Orbit rings */
+.orbit-ring{position:absolute;border-radius:50%;border:1px solid;animation:spin linear infinite;}
+.or1{width:340px;height:340px;border-color:rgba(0,194,255,.15);animation-duration:18s;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(72deg);}
+.or2{width:280px;height:280px;border-color:rgba(0,87,184,.2);animation-duration:12s;animation-direction:reverse;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(72deg);}
+@keyframes spin{from{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(0deg);}to{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(360deg);}}
+/* Floating badge labels */
+.feat-badge{position:absolute;display:flex;align-items:center;gap:7px;background:rgba(0,10,30,.75);backdrop-filter:blur(12px);border:1px solid rgba(0,194,255,.25);border-radius:12px;padding:9px 14px;font-size:.78rem;color:#fff;font-weight:500;white-space:nowrap;z-index:20;}
+.fb-icon{width:28px;height:28px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.fb-txt span{display:block;font-size:.65rem;color:rgba(255,255,255,.5);font-weight:400;}
+.badge-tl{top:8%;left:-10px;animation:float1 4s ease infinite;}
+.badge-tr{top:22%;right:-10px;animation:float2 5s ease infinite;}
+.badge-bl{bottom:22%;left:-10px;animation:float3 4.5s ease infinite;}
+.badge-br{bottom:8%;right:-10px;animation:float1 6s ease infinite 1s;}
+@keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes float3{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+/* THE PRODUCT IMAGE — CSS 3D treatment */
+.product-wrap{position:relative;z-index:10;animation:productFloat 5s ease infinite;}
+@keyframes productFloat{0%,100%{transform:translateY(0) rotateY(-4deg);}50%{transform:translateY(-14px) rotateY(4deg);}}
+.product-img{width:260px;height:auto;filter:drop-shadow(0 40px 60px rgba(0,0,0,.7)) drop-shadow(0 0 40px rgba(0,194,255,.3));image-rendering:auto;}
+/* Light sweep overlay on image */
+.product-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.18) 0%,transparent 40%,transparent 70%,rgba(0,194,255,.08) 100%);border-radius:4px;pointer-events:none;mix-blend-mode:overlay;}
+/* Scroll hint */
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.35);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.35));animation:scrollLine 2s ease infinite;}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ===== STATS BAR ===== */
+.stats-bar{background:var(--blue-dark);display:flex;justify-content:center;flex-wrap:wrap;}
+.stat-item{flex:1;min-width:150px;padding:22px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.08);}
+.stat-item:last-child{border:none;}
+.stat-n{font-size:1.7rem;font-weight:900;color:var(--accent);line-height:1;}
+.stat-l{font-size:.73rem;color:rgba(255,255,255,.55);margin-top:4px;}
+
+/* ===== FEATURES SECTION ===== */
+.features-section{background:#fff;padding:100px 60px;}
+.fs-inner{max-width:1180px;margin:0 auto;}
+.section-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;text-align:center;}
+.section-title{font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:900;color:var(--gray-900);letter-spacing:-1.2px;line-height:1.15;margin-bottom:14px;text-align:center;}
 .section-title span{color:var(--blue);}
-.section-sub{text-align:center;color:var(--gray-700);font-size:.95rem;max-width:560px;margin:0 auto 52px;line-height:1.65;}
+.section-sub{text-align:center;color:var(--gray-700);font-size:.97rem;max-width:540px;margin:0 auto 64px;line-height:1.7;}
+/* Feature cards — editorial layout */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.feat-card{border-radius:20px;padding:36px 30px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.feat-card:hover{transform:translateY(-6px);box-shadow:0 24px 56px rgba(0,87,184,.14);}
+.fc-dark{background:var(--gray-900);color:#fff;}
+.fc-blue{background:var(--blue);color:#fff;}
+.fc-light{background:var(--gray-100);color:var(--text);}
+.fc-accent{background:var(--accent);color:var(--blue-dark);}
+.feat-card .icon-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:22px;}
+.fc-dark .icon-wrap{background:rgba(255,255,255,.08);}
+.fc-blue .icon-wrap{background:rgba(255,255,255,.15);}
+.fc-light .icon-wrap{background:var(--blue-light);}
+.fc-accent .icon-wrap{background:rgba(0,0,0,.1);}
+.feat-card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;line-height:1.25;}
+.feat-card p{font-size:.87rem;line-height:1.7;opacity:.78;}
+.feat-card .badge-new{position:absolute;top:18px;right:18px;background:var(--gold);color:#000;font-size:.6rem;font-weight:800;padding:3px 10px;border-radius:99px;letter-spacing:.5px;}
+/* Large feature card spanning 2 cols */
+.feat-card.wide{grid-column:span 2;}
+.wide-inner{display:grid;grid-template-columns:1fr 200px;gap:24px;align-items:center;height:100%;}
+
+/* ===== COMPARISON TABLE ===== */
+.compare-section{background:var(--gray-100);padding:100px 40px;}
+.cs-inner{max-width:1280px;margin:0 auto;}
 .compare-wrap{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow-x:auto;border:1px solid var(--gray-200);}
 table{width:100%;border-collapse:collapse;min-width:960px;}
 thead tr{background:var(--blue-dark);}
 thead th{padding:0;position:relative;}
-.th-inner{padding:20px 13px 22px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;}
-.th-name{font-size:.86rem;font-weight:700;color:#fff;line-height:1.2;}
-.th-price{font-size:.71rem;color:rgba(255,255,255,.6);}
-.th-badge{font-size:.58rem;font-weight:800;padding:2px 8px;border-radius:99px;}
+.th-inner{padding:22px 14px 24px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;}
+.th-name{font-size:.88rem;font-weight:800;color:#fff;line-height:1.2;}
+.th-price{font-size:.72rem;color:rgba(255,255,255,.55);}
+.th-badge{font-size:.58rem;font-weight:800;padding:3px 9px;border-radius:99px;letter-spacing:.4px;}
 thead th:first-child{background:#002266;text-align:left;}
-.th-fh{padding:18px 24px;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.62);}
+.th-fh{padding:20px 26px;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.3px;}
 .popular-col{background:rgba(0,194,255,.08)!important;position:relative;}
-.popular-col::after{content:'';position:absolute;inset:0;border-left:2px solid var(--accent);border-right:2px solid var(--accent);pointer-events:none;}
+.popular-col::after{content:"";position:absolute;inset:0;border-left:2px solid var(--accent);border-right:2px solid var(--accent);pointer-events:none;}
 thead .popular-col{background:#004DB8!important;}
-thead .popular-col::before{content:'★ POPULAR';position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-50%);background:var(--accent);color:var(--blue-dark);font-size:.57rem;font-weight:800;padding:3px 10px;border-radius:99px;white-space:nowrap;}
-tbody tr{border-bottom:1px solid var(--gray-100);transition:.15s;}
+thead .popular-col::before{content:"★ POPULAR";position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-50%);background:var(--accent);color:var(--blue-dark);font-size:.57rem;font-weight:800;padding:3px 11px;border-radius:99px;white-space:nowrap;letter-spacing:.5px;}
+tbody tr{border-bottom:1px solid var(--gray-200);transition:background .15s;}
 tbody tr:hover{background:var(--blue-light);}
-tr.gh td{background:var(--gray-100);padding:9px 24px;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);border-bottom:1px solid var(--gray-200)!important;}
-tbody td{padding:12px 13px;font-size:.84rem;text-align:center;color:var(--text);vertical-align:middle;}
-tbody td:first-child{text-align:left;padding-left:24px;font-weight:500;color:var(--gray-700);min-width:155px;}
-.ck{color:#22C55E;font-size:1.05rem;}
-.cx{color:#CBD5E1;}
-tr.ctar td{padding:18px 13px;border-bottom:none;}
-.cta-btn{display:inline-block;background:var(--blue);color:#fff;padding:9px 15px;border-radius:99px;font-size:.76rem;font-weight:700;text-decoration:none;transition:.2s;white-space:nowrap;}
-.cta-btn:hover{background:var(--blue-dark);}
+tr.gh td{background:#f0f4fa;padding:10px 26px;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);border-bottom:1px solid var(--gray-200)!important;}
+tbody td{padding:13px 14px;font-size:.84rem;text-align:center;color:var(--text);vertical-align:middle;}
+tbody td:first-child{text-align:left;padding-left:26px;font-weight:500;color:var(--gray-700);min-width:165px;}
+.ck{color:#16a34a;font-size:1.1rem;font-weight:700;}
+.cx{color:#cbd5e1;}
+tr.ctar td{padding:20px 14px;border-bottom:none;}
+.cta-btn{display:inline-block;background:var(--blue);color:#fff;padding:10px 16px;border-radius:99px;font-size:.78rem;font-weight:700;text-decoration:none;transition:.2s;white-space:nowrap;}
+.cta-btn:hover{background:var(--blue-dark);transform:translateY(-1px);}
 .cta-btn.acc{background:var(--accent);color:var(--blue-dark);box-shadow:0 4px 14px rgba(0,194,255,.35);}
-/* WHY */
-.why-section{background:linear-gradient(135deg,var(--blue-dark),#003D99);padding:90px 32px;}
+
+/* ===== WHY ===== */
+.why-section{background:linear-gradient(150deg,#001030 0%,#002060 50%,#001540 100%);padding:100px 40px;}
 .why-inner{max-width:1100px;margin:0 auto;}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:52px;}
-.why-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:32px 24px;transition:.2s;}
-.why-card:hover{background:rgba(255,255,255,.11);transform:translateY(-4px);}
-.wi{font-size:2rem;margin-bottom:16px;display:block;}
-.why-card h3{font-size:.97rem;font-weight:700;color:#fff;margin-bottom:8px;}
-.why-card p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.65;}
-footer{background:var(--gray-900);color:rgba(255,255,255,.5);text-align:center;padding:32px;font-size:.82rem;}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:56px;}
+.why-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:36px 28px;transition:.25s;}
+.why-card:hover{background:rgba(0,194,255,.07);border-color:rgba(0,194,255,.25);transform:translateY(-5px);}
+.wi{font-size:2.2rem;margin-bottom:18px;display:block;}
+.why-card h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:10px;}
+.why-card p{font-size:.86rem;color:rgba(255,255,255,.58);line-height:1.7;}
+
+/* ===== CTA BANNER ===== */
+.cta-banner{background:linear-gradient(100deg,var(--blue-dark),#0057B8,#0099DD);padding:70px 40px;text-align:center;}
+.cta-banner h2{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:14px;}
+.cta-banner p{color:rgba(255,255,255,.7);font-size:1rem;margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto;}
+.cta-wa-big{display:inline-flex;align-items:center;gap:12px;background:#25D366;color:#fff;padding:18px 36px;border-radius:99px;font-weight:800;font-size:1.1rem;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,.4);transition:.2s;}
+.cta-wa-big:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,.55);}
+
+/* ===== FOOTER ===== */
+footer{background:#060d1f;color:rgba(255,255,255,.45);text-align:center;padding:36px 24px;font-size:.82rem;}
 footer strong{color:#fff;}
 footer a{color:var(--accent);text-decoration:none;}
-.wa-float{position:fixed;bottom:28px;right:28px;z-index:500;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(37,211,102,.45);text-decoration:none;font-size:1.6rem;animation:bounce 3s ease infinite;}
-@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-8px);}}
-.reveal{opacity:0;transform:translateY(28px);transition:.65s;}
+
+/* ===== WA FLOAT ===== */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:500;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;text-decoration:none;box-shadow:0 6px 28px rgba(37,211,102,.5);animation:waBounce 3s ease infinite;}
+@keyframes waBounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-9px);}}
+.wa-float:hover{animation:none;transform:scale(1.12);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-@media(max-width:900px){.showcase-inner{grid-template-columns:1fr;}#mcw{height:350px;}.hero-content{padding:0 28px;}.compare-section{padding:60px 16px;}nav{padding:0 18px;}.nav-tag{display:none;}}
+
+@media(max-width:1100px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;padding:100px 32px 80px;}
+  .hero-right{margin-top:60px;}
+  .hero-desc,.specs-row,.hero-btns,.price-block{justify-content:center;}
+  .product-stage{width:320px;height:400px;}
+  .product-img{width:200px;}
+  .badge-tl,.badge-bl{left:-5px;}
+  .badge-tr,.badge-br{right:-5px;}
+  .features-grid{grid-template-columns:1fr;}
+  .feat-card.wide{grid-column:span 1;}
+  .wide-inner{grid-template-columns:1fr;}
+  .wide-inner img{display:none;}
+  nav{padding:0 20px;}
+  .nav-pills{display:none;}
+}
+@media(max-width:700px){
+  .hero-inner{padding:80px 20px 60px;}
+  .features-section,.compare-section,.why-section{padding:64px 20px;}
+  .feat-badge{display:none;}
+}
 </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav>
-  <div class="nav-brand"><div class="dot"></div>SK Magic</div>
-  <span class="nav-tag">&#127474;&#127486; Agen Rasmi</span>
+  <div class="nav-brand"><div class="nav-dot"></div>SK Magic</div>
+  <div class="nav-pills">
+    <span class="nav-pill np-blue">&#127474;&#127486; Agen Rasmi</span>
+    <span class="nav-pill np-outline">Tiada Deposit</span>
+    <span class="nav-pill np-outline">Servis Percuma 5 Thn</span>
+  </div>
   <a href="https://wa.me/60123456789" class="nav-cta">&#128242; Hubungi Agen</a>
 </nav>
 
-<div class="hero">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <div class="hero-badge">&#9889; Promosi Istimewa 2025</div>
-      <h1 class="hero-title">Penapis Air <span>SK Magic</span><br>Teknologi Korea,<br>Tiada Tangki</h1>
-      <p class="hero-desc">JIKSOO — air bersih, bermineral, segar setiap masa. Bermula dari RM49/bln. Tiada deposit, pemasangan &amp; servis percuma seluruh Malaysia.</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="bokeh b1"></div>
+    <div class="bokeh b2"></div>
+    <div class="bokeh b3"></div>
+  </div>
+  <div class="hero-grid"></div>
+
+  <!-- Floating particles (JS generated) -->
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-inner">
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">&#9889; Promosi Istimewa 2025</div>
+      <h1 class="hero-title">
+        <span class="t-thin">Penapis Air</span><br>
+        <span class="t-blue">JIKSOO RIA</span><br>
+        Teknologi Korea
+      </h1>
+      <p class="hero-model">SK Magic &nbsp;&#183;&nbsp; Model Terbaru</p>
+      <p class="hero-desc">Penapis air tanpa tangki pertama Malaysia — air bersih, bermineral, segar terus dari paip. UV Sterilisasi setiap 2 jam. Nano 3-lapisan.</p>
+      <div class="specs-row">
+        <div class="spec-chip"><span class="ic">&#127756;</span>Tanpa Tangki</div>
+        <div class="spec-chip"><span class="ic">&#9728;&#65039;</span>UV Sterilisasi</div>
+        <div class="spec-chip"><span class="ic">&#127777;&#65039;</span>5 Suhu Air</div>
+        <div class="spec-chip"><span class="ic">&#128200;</span>Slim 21cm</div>
+        <div class="spec-chip"><span class="ic">&#129513;</span>Air Bermineral</div>
+      </div>
+      <div class="price-block">
+        <span class="price-main">RM59</span>
+        <span class="price-unit">/bulan sahaja</span>
+      </div>
+      <p class="price-note">&#10003; Tiada Deposit &nbsp; &#10003; Pemasangan Percuma &nbsp; &#10003; Servis 5 Tahun Percuma</p>
       <div class="hero-btns">
-        <a href="#bandingkan" class="btn-primary">Bandingkan 8 Model &rarr;</a>
-        <a href="https://wa.me/60123456789" class="btn-outline">Tanya Agen</a>
+        <a href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20SK%20Magic%20JIKSOO%20RIA.%20Boleh%20info%20lebih%20lanjut?" class="btn-wa">
+          &#128172; Tanya Agen Sekarang
+        </a>
+        <a href="#bandingkan" class="btn-sec">Bandingkan Model &#8594;</a>
+      </div>
+    </div>
+
+    <!-- RIGHT — Product 3D Stage -->
+    <div class="hero-right">
+      <div class="product-stage">
+        <!-- Glow -->
+        <div class="stage-glow"></div>
+        <!-- Orbit rings -->
+        <div class="orbit-ring or1"></div>
+        <div class="orbit-ring or2"></div>
+        <!-- Floating feature badges -->
+        <div class="feat-badge badge-tl">
+          <div class="fb-icon">&#127769;</div>
+          <div class="fb-txt"><strong>UV Sterilisasi</strong><span>Setiap 2 jam auto</span></div>
+        </div>
+        <div class="feat-badge badge-tr">
+          <div class="fb-icon">&#127777;&#65039;</div>
+          <div class="fb-txt"><strong>5 Suhu Air</strong><span>10°C hingga 100°C</span></div>
+        </div>
+        <div class="feat-badge badge-bl">
+          <div class="fb-icon">&#129515;</div>
+          <div class="fb-txt"><strong>Nano Filter</strong><span>0.0001 nanometer</span></div>
+        </div>
+        <div class="feat-badge badge-br">
+          <div class="fb-icon">&#128100;</div>
+          <div class="fb-txt"><strong>Child Lock</strong><span>Keselamatan bayi</span></div>
+        </div>
+        <!-- REAL PRODUCT IMAGE from SK Magic website -->
+        <div class="product-wrap">
+          <img class="product-img"
+            src="https://skmagicmy.com/wp-content/uploads/2018/12/large_wpua400fmywh_01.png"
+            alt="SK Magic JIKSOO RAPI Water Purifier"
+            onerror="this.src='https://skmagicofficial.my/cdn/shop/files/SKM_RIA_product_main.png?v=1';this.onerror=function(){this.src='https://via.placeholder.com/260x480/001540/00C2FF?text=SK+Magic+JIKSOO+RIA'}"
+          >
+        </div>
+        <!-- Floor reflection -->
+        <div class="floor-reflection"></div>
       </div>
     </div>
   </div>
-  <div class="hero-hint"><span>TATAL KE BAWAH</span><div class="scroll-arr"></div></div>
+
+  <div class="scroll-hint">
+    <span>Tatal ke bawah</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-n">0.0001</div><div class="stat-l">nm Nano Filtration</div></div>
+  <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">Suhu Air Berbeza</div></div>
+  <div class="stat-item"><div class="stat-n">21cm</div><div class="stat-l">Lebar Ultra-Slim</div></div>
+  <div class="stat-item"><div class="stat-n">99.9%</div><div class="stat-l">UV Sterilisasi</div></div>
+  <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">Tahun Servis Percuma</div></div>
 </div>
 
-<div class="stats-strip">
-  <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Model Penapis Air</div></div>
-  <div class="stat-item"><div class="stat-num">RM49</div><div class="stat-label">Harga Bermula/bln</div></div>
-  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Tahun Servis Percuma</div></div>
-  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Tiada Deposit</div></div>
-  <div class="stat-item"><div class="stat-num">&#127472;&#127479;</div><div class="stat-label">Teknologi Korea</div></div>
-</div>
-
-<div class="showcase-section">
-  <div class="showcase-inner">
-    <div class="showcase-text reveal">
-      <p class="sl">Teknologi JIKSOO</p>
-      <h2>Penapis Air <span>Ultra-Slim</span><br>Yang Tapis Segera</h2>
-      <p>Tiada tangki air — air ditapis terus dan keluar segar setiap masa. Sistem JIKSOO menggunakan 304 Stainless Steel Waterway dan UV Sterilisation untuk kebersihan maksimum.</p>
-      <div class="pills">
-        <div class="pill"><div class="pill-dot"></div>Tanpa Tangki</div>
-        <div class="pill"><div class="pill-dot"></div>UV Sterilisasi</div>
-        <div class="pill"><div class="pill-dot"></div>Air Bermineral</div>
-        <div class="pill"><div class="pill-dot"></div>Nano 3-Lapisan</div>
-        <div class="pill"><div class="pill-dot"></div>Sehingga 7 Suhu</div>
-        <div class="pill"><div class="pill-dot"></div>Jimat Elektrik 252%</div>
-      </div>
-      <a href="https://wa.me/60123456789" class="btn-primary">Dapatkan Demo Percuma &rarr;</a>
-    </div>
+<!-- FEATURES SECTION -->
+<section class="features-section">
+  <div class="fs-inner">
     <div class="reveal">
-      <div id="mcw">
-        <canvas id="model-canvas"></canvas>
-        <div class="model-label">&#128433; Drag untuk putar model 3D</div>
+      <p class="section-eyebrow">Kenapa JIKSOO RIA?</p>
+      <h2 class="section-title">Teknologi Yang <span>Memastikan</span><br>Air Bersih Setiap Masa</h2>
+      <p class="section-sub">JIKSOO RIA menggunakan sistem penapisan nano terkini dari Korea — tiada tangki, tiada risiko, tiada kompromi.</p>
+    </div>
+    <div class="features-grid reveal">
+      <!-- Card 1 — Dark wide -->
+      <div class="feat-card fc-dark wide">
+        <div class="badge-new">UTAMA</div>
+        <div class="wide-inner">
+          <div>
+            <div class="icon-wrap">&#128683;</div>
+            <h3>Sistem JIKSOO — Tanpa Tangki</h3>
+            <p>Air tidak disimpan dalam tangki. Ia ditapis dan dibekalkan terus — tiada risiko pertumbuhan bakteria, biofilm atau alga. Air segar setiap kali anda minum.</p>
+          </div>
+        </div>
       </div>
-      <div class="model-controls">
-        <button class="model-btn active" onclick="setModel('jiksoo',this)">JIKSOO RIA</button>
-        <button class="model-btn" onclick="setModel('slim',this)">Wiz R</button>
-        <button class="model-btn" onclick="setModel('mini',this)">Mini</button>
+      <!-- Card 2 -->
+      <div class="feat-card fc-light">
+        <div class="icon-wrap">&#127769;</div>
+        <h3>UV Sterilisasi Automatik</h3>
+        <p>Lampu UV-C membunuh 99.9% bakteria di kawasan paip secara automatik setiap 2 jam — tanpa perlu anda buat apa-apa.</p>
+      </div>
+      <!-- Card 3 — Blue -->
+      <div class="feat-card fc-blue">
+        <div class="icon-wrap">&#127777;&#65039;</div>
+        <h3>5 Suhu Air Dalam 1 Mesin</h3>
+        <p>Sangat Panas (100°C), Panas (85°C), Suam (50°C — suhu formula bayi), Sejuk (10°C), dan Suhu Bilik. Semua dalam satu mesin slim.</p>
+      </div>
+      <!-- Card 4 -->
+      <div class="feat-card fc-light">
+        <div class="icon-wrap">&#129515;</div>
+        <h3>Nano 3-Lapisan Filter</h3>
+        <p>Menapis 100% mikroplastik, virus, bakteria dan logam berat. Mineral penting kekal dalam air — bukan seperti air RO yang "kosong".</p>
+      </div>
+      <!-- Card 5 — Accent -->
+      <div class="feat-card fc-accent">
+        <div class="icon-wrap">&#128100;</div>
+        <h3>Child Lock &amp; Smart Touch</h3>
+        <p>Panel sentuh satu butang dengan child lock — selamat untuk isi susu bayi, anak-anak, dan mudah digunakan oleh semua ahli keluarga.</p>
+      </div>
+      <!-- Card 6 -->
+      <div class="feat-card fc-dark">
+        <div class="icon-wrap">&#9889;</div>
+        <h3>Jimat Elektrik 252%</h3>
+        <p>Teknologi instantaneous heating hanya guna elektrik bila air keluar sahaja — berbanding tangki konvensional yang terus panas 24 jam.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
+<!-- COMPARISON TABLE -->
 <div class="compare-section" id="bandingkan">
-  <div class="reveal">
-    <p class="section-label">Perbandingan Model</p>
-    <h2 class="section-title">Pilih Penapis Air <span>SK Magic</span><br>Yang Sesuai Untuk Anda</h2>
-    <p class="section-sub">8 model tersedia. Bandingkan ciri-ciri dan tentukan pilihan terbaik untuk keluarga anda.</p>
+  <div class="cs-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Perbandingan Model</p>
+      <h2 class="section-title">Pilih Penapis Air <span>SK Magic</span><br>Yang Sesuai Untuk Anda</h2>
+      <p class="section-sub">8 model tersedia untuk setiap keperluan dan bajet. Bandingkan dan pilih yang terbaik.</p>
+    </div>
+    <div class="compare-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th><div class="th-fh">Ciri / Model</div></th>
+            <th class="popular-col"><div class="th-inner"><span class="th-name">JIKSOO<br>RIA</span><span class="th-price">RM59/bln</span><span class="th-badge" style="background:var(--gold);color:#002;">&#9733; Terbaru</span></div></th>
+            <th><div class="th-inner"><span class="th-name">JIKSOO<br>RIA S</span><span class="th-price">RM65/bln</span></div></th>
+            <th><div class="th-inner"><span class="th-name">RICH+</span><span class="th-price">RM145/bln</span><span class="th-badge" style="background:#6366f1;color:#fff;">&#129398; Ais</span></div></th>
+            <th><div class="th-inner"><span class="th-name">JIKSOO<br>Hyper</span><span class="th-price">RM125/bln</span></div></th>
+            <th><div class="th-inner"><span class="th-name">Wiz R</span><span class="th-price">RM115/bln</span></div></th>
+            <th><div class="th-inner"><span class="th-name">Wiz S+</span><span class="th-price">RM110/bln</span></div></th>
+            <th><div class="th-inner"><span class="th-name">Mini<br>Merah</span><span class="th-price">RM79/bln</span></div></th>
+            <th><div class="th-inner"><span class="th-name">Mini<br>Putih</span><span class="th-price">RM79/bln</span></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="gh"><td colspan="9">&#128300; Teknologi Penapisan</td></tr>
+          <tr><td>Sistem JIKSOO (Tanpa Tangki)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr><td>Nano 3-Lapisan Filter</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr><td>Air Bermineral (Bukan RO)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr><td>UV Sterilisasi (setiap 2 jam)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr class="gh"><td colspan="9">&#127777;&#65039; Suhu Air</td></tr>
+          <tr><td>Bilangan Suhu</td><td class="popular-col"><b>5 Suhu</b></td><td><b>5 Suhu</b></td><td><b>7 Suhu + Ais</b></td><td><b>7 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td></tr>
+          <tr><td>Suhu Bayi / Suam (50°C)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
+          <tr><td>Pembuat Ais</td><td class="popular-col"><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
+          <tr class="gh"><td colspan="9">&#128208; Saiz &amp; Design</td></tr>
+          <tr><td>Ultra Slim (&le;21cm lebar)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr><td>Standing (Lantai)</td><td class="popular-col"><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
+          <tr class="gh"><td colspan="9">&#128295; Servis &amp; Faedah</td></tr>
+          <tr><td>Servis Percuma</td><td class="popular-col"><b>5 Tahun</b></td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td></tr>
+          <tr><td>Tukar Filter Percuma / 12 Bln</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr><td>Kunci Kanak-kanak</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr><td>Pemasangan Percuma</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+          <tr class="gh"><td colspan="9">&#128106; Paling Sesuai Untuk</td></tr>
+          <tr>
+            <td>Sesuai Untuk</td>
+            <td class="popular-col" style="font-size:.77rem;color:#0057B8;font-weight:700;">Keluarga baru / Budget bijak</td>
+            <td style="font-size:.77rem;">Keluarga ramai / Lebih suhu</td>
+            <td style="font-size:.77rem;">Peminat ais &amp; premium</td>
+            <td style="font-size:.77rem;">Pengguna aktif / Office</td>
+            <td style="font-size:.77rem;">Dapur kecil / Sewa</td>
+            <td style="font-size:.77rem;">Ruang luas / Standing</td>
+            <td style="font-size:.77rem;">Studio / Bilik</td>
+            <td style="font-size:.77rem;">Studio / Hadiah</td>
+          </tr>
+          <tr class="ctar">
+            <td style="font-weight:800;font-size:.84rem;color:#0057B8;">&#128242; Tanya Agen</td>
+            <td class="popular-col"><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20RIA" class="cta-btn acc">Tanya Sekarang</a></td>
+            <td><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20RIA%20S" class="cta-btn">Tanya Sekarang</a></td>
+            <td><a href="https://wa.me/60123456789?text=Minat%20RICH+" class="cta-btn">Tanya Sekarang</a></td>
+            <td><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20Hyper" class="cta-btn">Tanya Sekarang</a></td>
+            <td><a href="https://wa.me/60123456789?text=Minat%20Wiz%20R" class="cta-btn">Tanya Sekarang</a></td>
+            <td><a href="https://wa.me/60123456789?text=Minat%20Wiz%20S+" class="cta-btn">Tanya Sekarang</a></td>
+            <td><a href="https://wa.me/60123456789?text=Minat%20Mini%20Merah" class="cta-btn">Tanya Sekarang</a></td>
+            <td><a href="https://wa.me/60123456789?text=Minat%20Mini%20Putih" class="cta-btn">Tanya Sekarang</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align:center;font-size:.77rem;color:#94A3B8;margin-top:18px;">* Harga sewa anggaran promosi semasa. Hubungi agen untuk harga terkini dan pakej terbaik.</p>
   </div>
-  <div class="compare-wrap reveal">
-    <table>
-      <thead>
-        <tr>
-          <th><div class="th-fh">Ciri / Model</div></th>
-          <th class="popular-col"><div class="th-inner"><span class="th-name">JIKSOO<br>RIA</span><span class="th-price">RM59/bln</span><span class="th-badge" style="background:var(--gold);color:#002;">&#128465; Terbaru</span></div></th>
-          <th><div class="th-inner"><span class="th-name">JIKSOO<br>RIA S</span><span class="th-price">RM65/bln</span></div></th>
-          <th><div class="th-inner"><span class="th-name">RICH+</span><span class="th-price">RM145/bln</span><span class="th-badge" style="background:#6366f1;color:#fff;">&#129398; Ada Ais</span></div></th>
-          <th><div class="th-inner"><span class="th-name">JIKSOO<br>Hyper</span><span class="th-price">RM125/bln</span></div></th>
-          <th><div class="th-inner"><span class="th-name">Wiz R</span><span class="th-price">RM115/bln</span></div></th>
-          <th><div class="th-inner"><span class="th-name">Wiz S+</span><span class="th-price">RM110/bln</span></div></th>
-          <th><div class="th-inner"><span class="th-name">Mini<br>Merah</span><span class="th-price">RM79/bln</span></div></th>
-          <th><div class="th-inner"><span class="th-name">Mini<br>Putih</span><span class="th-price">RM79/bln</span></div></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="gh"><td colspan="9">&#128300; Teknologi Penapisan</td></tr>
-        <tr><td>Sistem JIKSOO (Tanpa Tangki)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>Penapisan Nano 3-Lapisan</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>Air Bermineral (Bukan RO)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>UV Sterilisasi</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr class="gh"><td colspan="9">&#127777;&#65039; Suhu Air</td></tr>
-        <tr><td>Bilangan Suhu</td><td class="popular-col"><b>5 Suhu</b></td><td><b>5 Suhu</b></td><td><b>7 Suhu + Ais</b></td><td><b>7 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td></tr>
-        <tr><td>Air Sejuk (10&deg;C)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>Suhu Bayi / Suam (50&deg;C)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
-        <tr><td>Air Panas (90&deg;C)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>Pembuat Ais</td><td class="popular-col"><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
-        <tr class="gh"><td colspan="9">&#128208; Saiz &amp; Reka Bentuk</td></tr>
-        <tr><td>Countertop (Atas Meja)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>Standing (Lantai)</td><td class="popular-col"><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
-        <tr><td>Ultra Slim (&le;21cm lebar)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr class="gh"><td colspan="9">&#128295; Servis &amp; Faedah</td></tr>
-        <tr><td>Servis Percuma</td><td class="popular-col">5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td></tr>
-        <tr><td>Tukar Alat Ganti / 12 Bln</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>Kunci Kanak-kanak</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr><td>Pemasangan Percuma</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
-        <tr class="gh"><td colspan="9">&#128106; Paling Sesuai Untuk</td></tr>
-        <tr><td>Sesuai Untuk</td>
-          <td class="popular-col" style="font-size:.77rem;color:#0057B8;font-weight:600;">Keluarga baru / Budget bijak</td>
-          <td style="font-size:.77rem;">Keluarga ramai / Lebih suhu</td>
-          <td style="font-size:.77rem;">Peminat ais &amp; premium</td>
-          <td style="font-size:.77rem;">Pengguna aktif / Office</td>
-          <td style="font-size:.77rem;">Dapur kecil / Sewa</td>
-          <td style="font-size:.77rem;">Ruang luas / Standing</td>
-          <td style="font-size:.77rem;">Studio / Bilik</td>
-          <td style="font-size:.77rem;">Studio / Hadiah</td>
-        </tr>
-        <tr class="ctar">
-          <td style="font-weight:700;font-size:.84rem;color:#0057B8;">&#128242; Tanya Agen</td>
-          <td class="popular-col"><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20RIA" class="cta-btn acc">Tanya Sekarang</a></td>
-          <td><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20RIA%20S" class="cta-btn">Tanya Sekarang</a></td>
-          <td><a href="https://wa.me/60123456789?text=Minat%20RICH+" class="cta-btn">Tanya Sekarang</a></td>
-          <td><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20Hyper" class="cta-btn">Tanya Sekarang</a></td>
-          <td><a href="https://wa.me/60123456789?text=Minat%20Wiz%20R" class="cta-btn">Tanya Sekarang</a></td>
-          <td><a href="https://wa.me/60123456789?text=Minat%20Wiz%20S+" class="cta-btn">Tanya Sekarang</a></td>
-          <td><a href="https://wa.me/60123456789?text=Minat%20Mini%20Merah" class="cta-btn">Tanya Sekarang</a></td>
-          <td><a href="https://wa.me/60123456789?text=Minat%20Mini%20Putih" class="cta-btn">Tanya Sekarang</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="text-align:center;font-size:.77rem;color:#94A3B8;margin-top:16px;">* Harga sewa adalah anggaran promosi semasa. Hubungi agen untuk harga terkini.</p>
 </div>
 
+<!-- WHY -->
 <div class="why-section">
   <div class="why-inner">
     <div class="reveal">
-      <p class="section-label" style="color:var(--accent);">Kenapa SK Magic?</p>
-      <h2 class="section-title" style="color:#fff;">Anak Syarikat SK Group Korea &mdash;<br>Fortune 500 Global</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,.65);">Bukan syarikat biasa. SK Group ialah konglomerat Fortune 500 dari Korea yang menguasai minyak &amp; gas, telekomunikasi dan teknologi dunia.</p>
+      <p class="section-eyebrow" style="color:var(--accent);">Kenapa SK Magic?</p>
+      <h2 class="section-title" style="color:#fff;">Anak Syarikat SK Group Korea<br><span style="color:var(--accent);">Fortune 500 Global</span></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.6);">Bukan syarikat biasa. SK Group ialah konglomerat Fortune 500 Korea menguasai minyak &amp; gas, telekomunikasi dan teknologi dunia.</p>
     </div>
     <div class="why-grid">
-      <div class="why-card reveal"><span class="wi">&#128683;&#129440;</span><h3>Tiada Tangki = Tiada Bakteria</h3><p>Air tidak bertakung. Risiko biofilm, alga dan legionella hampir sifar berbanding penapis konvensional.</p></div>
-      <div class="why-card reveal"><span class="wi">&#128142;</span><h3>Air Bermineral, Bukan RO</h3><p>SK Magic hanya tapis kotoran — mineral penting kekal dalam air. Lebih sihat daripada air RO.</p></div>
-      <div class="why-card reveal"><span class="wi">&#128300;</span><h3>UV Self-Sterilisation</h3><p>Lampu UV membunuh bakteria secara automatik di kawasan paip air — lebih bersih tanpa usaha.</p></div>
-      <div class="why-card reveal"><span class="wi">&#128295;</span><h3>Servis &amp; Alat Ganti Percuma</h3><p>Setiap 12 bulan juruteknik datang tukar 4 komponen percuma. Macam baru setiap tahun!</p></div>
-      <div class="why-card reveal"><span class="wi">&#9889;</span><h3>Jimat Elektrik 252%</h3><p>Sistem haba serta-merta hanya guna elektrik ketika air keluar — jimat berbanding model tangki.</p></div>
-      <div class="why-card reveal"><span class="wi">&#127758;</span><h3>Servis Seluruh Malaysia</h3><p>Pemasangan dan penghantaran percuma ke seluruh Malaysia. Tim juruteknik terlatih sedia membantu.</p></div>
+      <div class="why-card reveal"><span class="wi">&#128683;&#129440;</span><h3>Tiada Tangki = Tiada Bakteria</h3><p>Air tidak bertakung. Risiko biofilm, alga dan legionella hampir sifar berbanding penapis konvensional yang ada tangki.</p></div>
+      <div class="why-card reveal"><span class="wi">&#128142;</span><h3>Air Bermineral, Bukan RO</h3><p>Hanya tapis kotoran — mineral penting kekal. Lebih sihat daripada air RO yang "kosong" dari mineral semula jadi.</p></div>
+      <div class="why-card reveal"><span class="wi">&#127769;</span><h3>UV Self-Sterilisation</h3><p>Auto setiap 2 jam — lampu UV membunuh 99.9% bakteria tanpa anda perlu buat apa-apa pun.</p></div>
+      <div class="why-card reveal"><span class="wi">&#128295;</span><h3>Alat Ganti Percuma 5 Tahun</h3><p>Juruteknik datang ke rumah setiap 12 bulan untuk tukar 4 komponen filter secara percuma. Jaminan kualiti air.</p></div>
+      <div class="why-card reveal"><span class="wi">&#9889;</span><h3>Jimat Elektrik 252%</h3><p>Hanya guna elektrik masa air keluar — sistem instantaneous. Bukan seperti tangki yang panas 24/7.</p></div>
+      <div class="why-card reveal"><span class="wi">&#127758;</span><h3>Servis Seluruh Malaysia</h3><p>Pemasangan dan penghantaran percuma. Tim juruteknik terlatih bersedia di seluruh Malaysia.</p></div>
     </div>
   </div>
 </div>
 
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>Nak Cuba Demo Percuma?</h2>
+  <p>Hubungi agen sekarang dan dapatkan demo di rumah anda — tanpa komitmen, tiada bayaran pendahuluan.</p>
+  <a href="https://wa.me/60123456789?text=Saya%20nak%20book%20demo%20percuma%20SK%20Magic%20JIKSOO%20RIA" class="cta-wa-big">
+    &#128172; WhatsApp Agen Sekarang
+  </a>
+</div>
+
 <footer>
-  <p style="margin-bottom:8px;"><strong>SK Magic &mdash; Agen Rasmi Malaysia</strong></p>
+  <p style="margin-bottom:8px;"><strong>SK Magic — Agen Rasmi Malaysia</strong></p>
   <p>Hubungi agen: <a href="https://wa.me/60123456789">&#128242; WhatsApp Sekarang</a></p>
-  <p style="margin-top:12px;font-size:.74rem;">&copy; 2025 Laman web ini dikendalikan oleh agen bebas SK Magic yang berlesen. Bukan laman web rasmi SK Magic Malaysia.</p>
+  <p style="margin-top:12px;font-size:.73rem;">&copy; 2025 Laman web ini dikendalikan oleh agen bebas SK Magic yang berlesen. Bukan laman web rasmi SK Magic Malaysia.</p>
 </footer>
 
-<a href="https://wa.me/60123456789?text=Saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20SK%20Magic" class="wa-float">&#128172;</a>
+<a href="https://wa.me/60123456789?text=Saya%20nak%20tanya%20tentang%20SK%20Magic" class="wa-float">&#128172;</a>
 
 <script>
-// ================================================================
-//  UTILITY: build purifier geometry
-// ================================================================
-function buildPurifier(cfg){
-  var g=new THREE.Group();
-  var W=cfg.w||0.56,H=cfg.h||2.9,D=cfg.d||0.56;
-  var bMat=new THREE.MeshPhysicalMaterial({color:cfg.color,metalness:cfg.m||.72,roughness:cfg.r||.14,envMapIntensity:1.4});
-  var aMat=new THREE.MeshPhysicalMaterial({color:0x00C2FF,metalness:.95,roughness:.04,emissive:0x004466,emissiveIntensity:.55});
-  var dMat=new THREE.MeshPhysicalMaterial({color:0x060e1c,metalness:.85,roughness:.2});
-  var lMat=new THREE.MeshPhysicalMaterial({color:0x00C2FF,emissive:0x00C2FF,emissiveIntensity:3,metalness:.9,roughness:.03});
-  var sMat=new THREE.MeshPhysicalMaterial({color:0x0044AA,emissive:0x0033AA,emissiveIntensity:1.5,transparent:true,opacity:.9});
-  // Body
-  var body=new THREE.Mesh(new THREE.BoxGeometry(W,H,D,2,6,2),bMat);
-  body.castShadow=true; g.add(body);
-  // Top cap
-  var cap=new THREE.Mesh(new THREE.CylinderGeometry(W/2*.88,W/2*.88,.1,32),aMat);
-  cap.position.y=H/2+.04; g.add(cap);
-  // Antenna
-  var ant=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,.22,16),aMat);
-  ant.position.y=H/2+.16; g.add(ant);
-  var antT=new THREE.Mesh(new THREE.SphereGeometry(.048,16,16),new THREE.MeshPhysicalMaterial({color:0x00C2FF,emissive:0x00AAFF,emissiveIntensity:2.2}));
-  antT.position.y=H/2+.29; g.add(antT);
-  // Screen panel
-  var pan=new THREE.Mesh(new THREE.BoxGeometry(W*.78,H*.24,.04),dMat);
-  pan.position.set(0,H*.12,D/2+.02); g.add(pan);
-  var scr=new THREE.Mesh(new THREE.BoxGeometry(W*.62,H*.17,.01),sMat);
-  scr.position.set(0,H*.12,D/2+.045); g.add(scr);
-  // Screen lines
-  for(var i=0;i<3;i++){
-    var ln=new THREE.Mesh(new THREE.BoxGeometry(W*.48,.009,.004),new THREE.MeshBasicMaterial({color:0x44DDFF,transparent:true,opacity:.7}));
-    ln.position.set(0,H*.17-i*.038,D/2+.052); g.add(ln);
-  }
-  // LED vertical strips
-  var lv=new THREE.Mesh(new THREE.BoxGeometry(.022,H*.52,.013),lMat);
-  lv.position.set(W/2-.038,-H*.05,D/2+.003); g.add(lv);
-  var lv2=lv.clone(); lv2.position.x=-W/2+.038; g.add(lv2);
-  // Horizontal accent rings
-  for(var j=0;j<5;j++){
-    var hr=new THREE.Mesh(new THREE.BoxGeometry(W*.92,.018,D+.008),
-      new THREE.MeshPhysicalMaterial({color:0x00C2FF,emissive:0x00C2FF,emissiveIntensity:.9,metalness:.8,roughness:.12}));
-    hr.position.y=-H*.3+j*.2; g.add(hr);
-  }
-  // Nozzle
-  var arm=new THREE.Mesh(new THREE.BoxGeometry(.15,.11,D*.5),dMat);
-  arm.position.set(0,-H*.22,D/2+.045); g.add(arm);
-  var nz=new THREE.Mesh(new THREE.CylinderGeometry(.038,.05,.26,20),aMat);
-  nz.position.set(0,-H*.34,D/2+.15); nz.rotation.x=Math.PI/5; g.add(nz);
-  // Water drip
-  var drip=new THREE.Mesh(new THREE.SphereGeometry(.038,12,12),
-    new THREE.MeshPhysicalMaterial({color:0x66CCFF,transparent:true,opacity:.7,roughness:.08}));
-  drip.position.set(0,-H*.46,D/2+.21); drip.userData.drip=true; g.add(drip);
-  // Filter window (glass)
-  var win=new THREE.Mesh(new THREE.BoxGeometry(W*.6,H*.28,.018),
-    new THREE.MeshPhysicalMaterial({color:0x1a3a6a,transparent:true,opacity:.3,roughness:.05}));
-  win.position.set(0,-H*.06,D/2+.009); g.add(win);
-  // Cartridges
-  var cc=[0x3377BB,0x44AA77,0xBB8833];
-  for(var k=0;k<3;k++){
-    var cart=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,H*.22,16),
-      new THREE.MeshPhysicalMaterial({color:cc[k],metalness:.3,roughness:.4,transparent:true,opacity:.6}));
-    cart.position.set((k-1)*.11,-H*.06,D/2-.055); g.add(cart);
-  }
-  // Base
-  var base=new THREE.Mesh(new THREE.BoxGeometry(W*1.18,.1,D*1.18),dMat);
-  base.position.y=-H/2-.05; base.castShadow=true; base.receiveShadow=true; g.add(base);
-  // Feet
-  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(function(f){
-    var ft=new THREE.Mesh(new THREE.CylinderGeometry(.038,.046,.055,12),
-      new THREE.MeshPhysicalMaterial({color:0x111111}));
-    ft.position.set(f[0]*W*.38,-H/2-.13,f[1]*D*.38); g.add(ft);
-  });
-  return g;
-}
-
-// ================================================================
-//  HERO 3D BACKGROUND
-// ================================================================
+// Generate floating particles
 (function(){
-  var canvas=document.getElementById('hero-canvas');
-  var hero=canvas.parentElement;
-  var W=hero.offsetWidth, H=hero.offsetHeight;
-  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setSize(W,H);
-  renderer.shadowMap.enabled=true;
-  var scene=new THREE.Scene();
-  var cam=new THREE.PerspectiveCamera(52,W/H,.1,200);
-  cam.position.set(3,1,11); cam.lookAt(0,0,0);
-  // Lights
-  scene.add(new THREE.AmbientLight(0x112244,1.3));
-  var dl=new THREE.DirectionalLight(0x00C2FF,3.5); dl.position.set(5,10,8); dl.castShadow=true; scene.add(dl);
-  var rl=new THREE.PointLight(0x0057B8,4,30); rl.position.set(-6,3,2); scene.add(rl);
-  var gl=new THREE.PointLight(0x00C2FF,2,20); gl.position.set(0,0,5); scene.add(gl);
-  // Grid floor
-  var grid=new THREE.GridHelper(30,40,0x001a4d,0x001a4d);
-  grid.position.y=-1.6; grid.material.opacity=.3; grid.material.transparent=true; scene.add(grid);
-  // Floor plane
-  var flr=new THREE.Mesh(new THREE.PlaneGeometry(30,30),
-    new THREE.MeshPhysicalMaterial({color:0x000c28,metalness:.8,roughness:.7,transparent:true,opacity:.65}));
-  flr.rotation.x=-Math.PI/2; flr.position.y=-1.6; flr.receiveShadow=true; scene.add(flr);
-  // Purifiers
-  var p1=buildPurifier({w:.52,h:2.8,d:.52,color:0xC0D0E8,m:.73,r:.12});
-  p1.position.set(3.5,0,0); p1.rotation.y=-.4; scene.add(p1);
-  var p2=buildPurifier({w:.45,h:2.4,d:.45,color:0x8090AA,m:.65,r:.22});
-  p2.position.set(5.2,-.3,.5); p2.rotation.y=.25; scene.add(p2);
-  var p3=buildPurifier({w:.38,h:2.0,d:.38,color:0x1a2a4a,m:.9,r:.08});
-  p3.position.set(2.0,-.7,-1); p3.rotation.y=.65; scene.add(p3);
-  // Glow ring
-  var rg=new THREE.Mesh(new THREE.RingGeometry(.3,.36,48),
-    new THREE.MeshBasicMaterial({color:0x00C2FF,transparent:true,opacity:.3,side:THREE.DoubleSide}));
-  rg.rotation.x=-Math.PI/2; rg.position.set(3.5,-1.45,0); scene.add(rg);
-  // Particles
-  var dpg=new THREE.SphereGeometry(.038,8,8);
-  var dpm=new THREE.MeshPhysicalMaterial({color:0x00C2FF,transparent:true,opacity:.55,roughness:.06});
-  var drops=[];
-  for(var i=0;i<55;i++){
-    var d=new THREE.Mesh(dpg,dpm);
-    d.position.set((Math.random()-.5)*13,(Math.random()-.5)*8,(Math.random()-.5)*6-2);
-    d.userData={spd:.004+Math.random()*.008,ph:Math.random()*Math.PI*2};
-    scene.add(d); drops.push(d);
+  var container=document.getElementById("particles");
+  var colors=["rgba(0,194,255,",  "rgba(0,87,184,", "rgba(100,200,255,"];
+  for(var i=0;i<35;i++){
+    var p=document.createElement("div");
+    p.className="particle";
+    var size=2+Math.random()*5;
+    var col=colors[Math.floor(Math.random()*colors.length)];
+    p.style.cssText=[
+      "width:"+size+"px","height:"+size+"px",
+      "left:"+Math.random()*100+"%",
+      "background:"+col+(0.2+Math.random()*0.5)+")",
+      "animation-duration:"+(8+Math.random()*14)+"s",
+      "animation-delay:"+(Math.random()*14)+"s"
+    ].join(";");
+    container.appendChild(p);
   }
-  var t=0;
-  function anim(){
-    requestAnimationFrame(anim); t+=.01;
-    p1.position.y=Math.sin(t*.7)*.08; p1.rotation.y=-.4+Math.sin(t*.3)*.05;
-    p2.position.y=-.3+Math.sin(t*.5+1)*.07;
-    p3.position.y=-.7+Math.sin(t*.6+2)*.07;
-    rg.scale.x=1+Math.sin(t*1.2)*.08; rg.scale.z=1+Math.sin(t*1.2)*.08;
-    rg.material.opacity=.15+Math.sin(t*1.2)*.1;
-    drops.forEach(function(d){
-      d.position.y-=d.userData.spd;
-      d.position.x+=Math.sin(t+d.userData.ph)*.002;
-      if(d.position.y<-5) d.position.y=5;
-    });
-    cam.position.y=1+Math.sin(t*.2)*.15;
-    gl.intensity=2+Math.sin(t*1.8)*.8;
-    renderer.render(scene,cam);
-  }
-  anim();
-  window.addEventListener('resize',function(){
-    var W2=hero.offsetWidth,H2=hero.offsetHeight;
-    cam.aspect=W2/H2; cam.updateProjectionMatrix(); renderer.setSize(W2,H2);
-  });
-})();
-
-// ================================================================
-//  MODEL VIEWER — Interactive
-// ================================================================
-(function(){
-  var canvas=document.getElementById('model-canvas');
-  var wrap=document.getElementById('mcw');
-  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setSize(wrap.offsetWidth,wrap.offsetHeight);
-  renderer.shadowMap.enabled=true;
-  var scene=new THREE.Scene();
-  var cam=new THREE.PerspectiveCamera(42,wrap.offsetWidth/wrap.offsetHeight,.1,100);
-  cam.position.set(0,.5,5.5); cam.lookAt(0,0,0);
-  // Lights
-  scene.add(new THREE.AmbientLight(0x223355,2.2));
-  var kl=new THREE.DirectionalLight(0xffffff,4); kl.position.set(5,8,6); kl.castShadow=true; scene.add(kl);
-  var fl=new THREE.PointLight(0x00C2FF,5,20); fl.position.set(-4,2,3); scene.add(fl);
-  scene.add(new THREE.PointLight(0x0057B8,3,15)).position.set(0,-3,-5);
-  scene.add(new THREE.PointLight(0xffffff,2,10)).position.set(0,6,0);
-  // Env sphere
-  var es=new THREE.Mesh(new THREE.SphereGeometry(40,16,16),
-    new THREE.MeshBasicMaterial({color:0x001030,side:THREE.BackSide})); scene.add(es);
-  // Floor
-  var flrM=new THREE.Mesh(new THREE.CircleGeometry(2.5,64),
-    new THREE.MeshPhysicalMaterial({color:0x000d20,metalness:.7,roughness:.6,transparent:true,opacity:.6}));
-  flrM.rotation.x=-Math.PI/2; flrM.position.y=-1.65; flrM.receiveShadow=true; scene.add(flrM);
-  // Glow ring floor
-  var gr=new THREE.Mesh(new THREE.RingGeometry(1.0,1.12,64),
-    new THREE.MeshBasicMaterial({color:0x00C2FF,transparent:true,opacity:.32,side:THREE.DoubleSide}));
-  gr.rotation.x=-Math.PI/2; gr.position.y=-1.63; scene.add(gr);
-
-  var mg=new THREE.Group(); scene.add(mg);
-  var curKey='jiksoo';
-  var cfgs={
-    jiksoo:{w:.58,h:3.0,d:.58,color:0xC5D5E8,m:.72,r:.13},
-    slim:  {w:.5, h:2.6,d:.5, color:0x8899AA,m:.65,r:.2},
-    mini:  {w:.44,h:2.0,d:.44,color:0xDD3333,m:.62,r:.24}
-  };
-
-  function loadModel(key){
-    while(mg.children.length) mg.remove(mg.children[0]);
-    curKey=key;
-    var m=buildPurifier(cfgs[key]); mg.add(m);
-    // viewer particles
-    var dg=new THREE.SphereGeometry(.028,6,6);
-    var dm=new THREE.MeshPhysicalMaterial({color:0x66DDFF,transparent:true,opacity:.5,roughness:.1});
-    for(var i=0;i<18;i++){
-      var dp=new THREE.Mesh(dg,dm);
-      dp.position.set((Math.random()-.5)*3,(Math.random()-.5)*4,(Math.random()-.5)*2);
-      dp.userData={vy:-.011-.009*Math.random(),ph:Math.random()*Math.PI*2};
-      mg.add(dp);
-    }
-  }
-
-  window.setModel=function(key,btn){
-    loadModel(key);
-    document.querySelectorAll('.model-btn').forEach(function(b){b.classList.remove('active');});
-    btn.classList.add('active');
-  };
-  loadModel('jiksoo');
-
-  var isDrag=false,lastX=0,lastY=0,rotY=.3,rotX=.08,autoR=true;
-  wrap.addEventListener('mousedown',function(e){isDrag=true;lastX=e.clientX;lastY=e.clientY;autoR=false;});
-  wrap.addEventListener('touchstart',function(e){isDrag=true;lastX=e.touches[0].clientX;lastY=e.touches[0].clientY;autoR=false;});
-  window.addEventListener('mouseup',function(){isDrag=false;setTimeout(function(){autoR=true;},2000);});
-  window.addEventListener('touchend',function(){isDrag=false;setTimeout(function(){autoR=true;},2000);});
-  window.addEventListener('mousemove',function(e){
-    if(!isDrag)return;
-    rotY+=(e.clientX-lastX)*.012; rotX+=(e.clientY-lastY)*.006;
-    rotX=Math.max(-.5,Math.min(.5,rotX)); lastX=e.clientX; lastY=e.clientY;
-  });
-  window.addEventListener('touchmove',function(e){
-    if(!isDrag)return;
-    rotY+=(e.touches[0].clientX-lastX)*.012; rotX+=(e.touches[0].clientY-lastY)*.006;
-    rotX=Math.max(-.5,Math.min(.5,rotX)); lastX=e.touches[0].clientX; lastY=e.touches[0].clientY;
-  });
-
-  var t2=0;
-  function animM(){
-    requestAnimationFrame(animM); t2+=.015;
-    if(autoR) rotY+=.009;
-    mg.rotation.y=rotY; mg.rotation.x=rotX;
-    mg.position.y=Math.sin(t2*.6)*.09;
-    mg.traverse(function(o){
-      if(o.userData&&o.userData.drip){
-        o.position.y-=.005; o.scale.y=.8+Math.abs(Math.sin(t2*2))*.4;
-        if(o.position.y<-2.6) o.position.y=cfgs[curKey].h*.5;
-      }
-      if(o.userData&&o.userData.vy!==undefined){
-        o.position.y+=o.userData.vy;
-        o.position.x+=Math.sin(t2+o.userData.ph)*.003;
-        if(o.position.y<-2.6) o.position.y=2.6;
-      }
-    });
-    gr.material.opacity=.22+Math.sin(t2*1.5)*.14;
-    gr.scale.x=1+Math.sin(t2*1.2)*.06; gr.scale.z=1+Math.sin(t2*1.2)*.06;
-    fl.intensity=4+Math.sin(t2*1.8)*1.5;
-    renderer.render(scene,cam);
-  }
-  animM();
-  window.addEventListener('resize',function(){
-    var W2=wrap.offsetWidth,H2=wrap.offsetHeight;
-    cam.aspect=W2/H2; cam.updateProjectionMatrix(); renderer.setSize(W2,H2);
-  });
 })();
 
 // Scroll reveal
 var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*90);});
+  entries.forEach(function(e,i){
+    if(e.isIntersecting) setTimeout(function(){e.target.classList.add("visible");},i*110);
+  });
 },{threshold:.1});
-document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+document.querySelectorAll(".reveal").forEach(function(el){obs.observe(el);});
+
 // Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click',function(e){
+document.querySelectorAll("a[href^=\"#\"]").forEach(function(a){
+  a.addEventListener("click",function(e){
     e.preventDefault();
-    var t=document.querySelector(a.getAttribute('href'));
-    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    var t=document.querySelector(a.getAttribute("href"));
+    if(t) t.scrollIntoView({behavior:"smooth",block:"start"});
   });
 });
 </script>
