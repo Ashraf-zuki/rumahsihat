@@ -1,1029 +1,536 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SK Magic Penapis Air — Agen Rasmi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --primary: #003366;
-      --accent: #00AEEF;
-      --gold: #F5A623;
-      --dark: #0a0f1e;
-      --light: #f4f8fc;
-      --white: #ffffff;
-      --text: #1a2540;
-      --muted: #6b7a99;
-      --card-bg: #ffffff;
-      --border: #dde6f0;
-      --green: #00b87a;
-      --red: #e53935;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--light);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* ─── NAVBAR ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(0,51,102,0.97);
-      backdrop-filter: blur(12px);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5vw;
-      height: 64px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.2);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-weight: 900;
-      color: var(--white);
-      letter-spacing: 0.02em;
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-cta {
-      background: var(--gold); color: var(--dark);
-      font-weight: 600; font-size: 0.85rem;
-      padding: 0.45rem 1.1rem; border-radius: 50px;
-      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
-      white-space: nowrap;
-    }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(245,166,35,0.4); }
-
-    /* ─── HERO ─── */
-    .hero {
-      margin-top: 64px;
-      background: linear-gradient(135deg, #003366 0%, #005599 50%, #0077cc 100%);
-      padding: 3.5rem 5vw 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(0,174,239,0.18) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(245,166,35,0.15);
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.3rem 1rem; border-radius: 50px;
-      margin-bottom: 1rem;
-      animation: fadeDown 0.6s ease both;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 900; color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 0.75rem;
-      animation: fadeDown 0.7s 0.1s ease both;
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero p {
-      color: rgba(255,255,255,0.8);
-      font-size: 1rem; max-width: 520px; margin: 0 auto 2rem;
-      line-height: 1.6;
-      animation: fadeDown 0.7s 0.2s ease both;
-    }
-    .hero-btns {
-      display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
-      animation: fadeDown 0.7s 0.3s ease both;
-    }
-    .btn-primary {
-      background: var(--gold); color: var(--dark);
-      font-weight: 700; padding: 0.75rem 1.8rem; border-radius: 50px;
-      text-decoration: none; font-size: 0.95rem;
-      transition: all 0.2s;
-      box-shadow: 0 4px 20px rgba(245,166,35,0.35);
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(245,166,35,0.5); }
-    .btn-outline {
-      background: transparent; color: var(--white);
-      border: 2px solid rgba(255,255,255,0.5);
-      font-weight: 600; padding: 0.75rem 1.8rem; border-radius: 50px;
-      text-decoration: none; font-size: 0.95rem;
-      transition: all 0.2s;
-    }
-    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
-
-    /* trust bar */
-    .trust-bar {
-      background: var(--dark);
-      padding: 0.75rem 5vw;
-      display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex; align-items: center; gap: 0.5rem;
-      color: rgba(255,255,255,0.75); font-size: 0.82rem; font-weight: 500;
-    }
-    .trust-item .icon { font-size: 1rem; }
-
-    /* ─── SECTION LABELS ─── */
-    .section-label {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-    .section-label .eyebrow {
-      display: inline-block;
-      color: var(--accent); font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .section-label h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 900; color: var(--primary);
-      line-height: 1.2;
-    }
-    .section-label p {
-      color: var(--muted); font-size: 0.95rem;
-      max-width: 480px; margin: 0.6rem auto 0;
-      line-height: 1.6;
-    }
-
-    /* ─── PROMO SLIDESHOW ─── */
-    .promo-section {
-      padding: 4rem 5vw;
-      background: var(--light);
-    }
-
-    .slideshow-wrapper {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,51,102,0.15);
-    }
-    .slides {
-      display: flex;
-      transition: transform 0.55s cubic-bezier(0.77,0,0.18,1);
-    }
-    .slide {
-      min-width: 100%;
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      min-height: 320px;
-      display: flex; align-items: center;
-    }
-    .slide-bg {
-      position: absolute; inset: 0;
-      z-index: 0;
-    }
-    .slide-content {
-      position: relative; z-index: 1;
-      padding: 2.5rem 3rem;
-      max-width: 520px;
-    }
-    .slide-tag {
-      display: inline-block;
-      font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 0.25rem 0.7rem; border-radius: 50px;
-      margin-bottom: 0.9rem;
-    }
-    .slide h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 900;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-    }
-    .slide p {
-      font-size: 0.9rem; line-height: 1.6;
-      margin-bottom: 1.25rem;
-    }
-    .slide-cta {
-      display: inline-block;
-      font-weight: 700; font-size: 0.85rem;
-      padding: 0.6rem 1.4rem; border-radius: 50px;
-      text-decoration: none; transition: all 0.2s;
-    }
-    /* slide 1 */
-    .slide-1 .slide-bg { background: linear-gradient(135deg, #003366, #0066cc); }
-    .slide-1 .slide-bg::after {
-      content: '💧'; position: absolute;
-      right: 8%; bottom: 10%;
-      font-size: 8rem; opacity: 0.08;
-    }
-    .slide-1 .slide-tag { background: rgba(0,174,239,0.2); color: #00AEEF; border: 1px solid rgba(0,174,239,0.4); }
-    .slide-1 h3, .slide-1 p { color: #fff; }
-    .slide-1 .slide-cta { background: var(--gold); color: var(--dark); }
-    .slide-1 .slide-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,166,35,0.45); }
-    /* slide 2 */
-    .slide-2 .slide-bg { background: linear-gradient(135deg, #00704a, #00b87a); }
-    .slide-2 .slide-bg::after {
-      content: '✨'; position: absolute;
-      right: 8%; bottom: 10%;
-      font-size: 7rem; opacity: 0.1;
-    }
-    .slide-2 .slide-tag { background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
-    .slide-2 h3, .slide-2 p { color: #fff; }
-    .slide-2 .slide-cta { background: #fff; color: #00704a; }
-    .slide-2 .slide-cta:hover { transform: translateY(-2px); }
-    /* slide 3 */
-    .slide-3 .slide-bg { background: linear-gradient(135deg, #7b2ff7, #b06ef7); }
-    .slide-3 .slide-bg::after {
-      content: '🏠'; position: absolute;
-      right: 8%; bottom: 10%;
-      font-size: 7rem; opacity: 0.1;
-    }
-    .slide-3 .slide-tag { background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
-    .slide-3 h3, .slide-3 p { color: #fff; }
-    .slide-3 .slide-cta { background: var(--gold); color: var(--dark); }
-    .slide-3 .slide-cta:hover { transform: translateY(-2px); }
-    /* slide 4 */
-    .slide-4 .slide-bg { background: linear-gradient(135deg, #b5410e, #f06614); }
-    .slide-4 .slide-bg::after {
-      content: '🎁'; position: absolute;
-      right: 8%; bottom: 10%;
-      font-size: 7rem; opacity: 0.1;
-    }
-    .slide-4 .slide-tag { background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
-    .slide-4 h3, .slide-4 p { color: #fff; }
-    .slide-4 .slide-cta { background: #fff; color: #b5410e; }
-    .slide-4 .slide-cta:hover { transform: translateY(-2px); }
-
-    /* slide arrows */
-    .slide-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      z-index: 10;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff; border-radius: 50%;
-      width: 40px; height: 40px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; cursor: pointer;
-      transition: background 0.2s;
-    }
-    .slide-nav:hover { background: rgba(255,255,255,0.35); }
-    .slide-nav.prev { left: 14px; }
-    .slide-nav.next { right: 14px; }
-
-    /* dots */
-    .slide-dots {
-      display: flex; justify-content: center; gap: 0.5rem;
-      margin-top: 1.25rem;
-    }
-    .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #c5d3e0; cursor: pointer;
-      transition: all 0.3s;
-    }
-    .dot.active { background: var(--primary); width: 22px; border-radius: 4px; }
-
-    /* promo countdown */
-    .promo-note {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.82rem; color: var(--muted);
-    }
-    .promo-note strong { color: var(--primary); }
-
-    /* ─── COMPARISON SECTION ─── */
-    .compare-section {
-      padding: 4rem 5vw;
-      background: var(--white);
-    }
-
-    .compare-wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .compare-table {
-      width: 100%;
-      min-width: 780px;
-      border-collapse: separate;
-      border-spacing: 0 10px;
-    }
-
-    /* header row */
-    .compare-table thead tr th {
-      padding: 0 8px 1rem;
-      font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--muted);
-      text-align: center;
-    }
-    .compare-table thead tr th:first-child { text-align: left; }
-
-    /* plan header cards */
-    .plan-header-cell {
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: 14px 14px 0 0;
-      padding: 1rem 0.75rem 0.85rem !important;
-      text-align: center;
-    }
-    .plan-header-cell.featured {
-      background: linear-gradient(160deg, #003366, #005599);
-      border-color: #003366;
-    }
-    .plan-header-cell .plan-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem; font-weight: 900;
-      color: var(--primary);
-      display: block; margin-bottom: 0.15rem;
-    }
-    .plan-header-cell.featured .plan-name { color: #fff; }
-    .plan-header-cell .plan-type {
-      font-size: 0.65rem; color: var(--muted); text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .plan-header-cell.featured .plan-type { color: rgba(255,255,255,0.65); }
-    .plan-header-cell .plan-price {
-      font-size: 1.3rem; font-weight: 700; color: var(--primary);
-      margin-top: 0.4rem; display: block;
-    }
-    .plan-header-cell.featured .plan-price { color: var(--gold); }
-    .plan-header-cell .plan-price span { font-size: 0.7rem; font-weight: 400; }
-    .badge-popular {
-      display: inline-block;
-      background: var(--gold); color: var(--dark);
-      font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.1em; padding: 0.15rem 0.55rem; border-radius: 50px;
-      margin-bottom: 0.3rem;
-    }
-
-    /* rows */
-    .compare-table tbody tr td {
-      padding: 0.65rem 0.75rem;
-      font-size: 0.875rem;
-      background: var(--card-bg);
-      border-top: 1px solid var(--border);
-      text-align: center;
-      vertical-align: middle;
-    }
-    .compare-table tbody tr td:first-child {
-      text-align: left;
-      border-left: 1px solid var(--border);
-      border-radius: 0;
-      font-weight: 500; color: var(--text);
-      padding-left: 1rem;
-    }
-    .compare-table tbody tr td:last-child {
-      border-right: 1px solid var(--border);
-    }
-    /* featured column */
-    .compare-table tbody tr td.feat-col {
-      background: #eef4ff;
-      border-left: 2px solid #003366;
-      border-right: 2px solid #003366;
-    }
-    .compare-table tbody tr:last-child td.feat-col {
-      border-bottom: 2px solid #003366;
-      border-radius: 0 0 4px 4px;
-    }
-    /* row alt */
-    .compare-table tbody tr:nth-child(even) td:not(.feat-col) {
-      background: #f8fafc;
-    }
-    .compare-table tbody tr:nth-child(even) td.feat-col {
-      background: #e4eeff;
-    }
-
-    /* last row (CTA) */
-    .cta-row td {
-      padding: 1rem 0.75rem !important;
-      border-bottom: 1px solid var(--border) !important;
-    }
-    .cta-row td:first-child {
-      border-left: 1px solid var(--border) !important;
-      border-radius: 0 0 0 12px;
-    }
-    .cta-row td:last-child {
-      border-right: 1px solid var(--border) !important;
-      border-radius: 0 0 12px 0;
-    }
-
-    .check { color: var(--green); font-size: 1.05rem; }
-    .cross { color: #ccc; font-size: 1rem; }
-    .partial { color: var(--gold); font-size: 0.8rem; font-weight: 600; }
-
-    .row-label-group {
-      font-size: 0.72rem; color: var(--muted);
-      display: block; font-weight: 400; margin-top: 0.1rem;
-    }
-
-    .table-cta {
-      display: inline-block;
-      padding: 0.5rem 1.1rem; border-radius: 50px;
-      font-size: 0.8rem; font-weight: 700;
-      text-decoration: none; transition: all 0.2s;
-      background: var(--primary); color: #fff;
-      white-space: nowrap;
-    }
-    .table-cta:hover { background: #004d99; transform: translateY(-1px); }
-    .table-cta.featured-cta {
-      background: var(--gold); color: var(--dark);
-    }
-    .table-cta.featured-cta:hover { box-shadow: 0 4px 16px rgba(245,166,35,0.4); }
-
-    .category-row td {
-      background: #f0f5fb !important;
-      font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--primary); padding: 0.5rem 1rem !important;
-      border-top: 2px solid var(--border) !important;
-    }
-    .category-row td.feat-col {
-      background: #ddeaf8 !important;
-    }
-
-    /* ─── WHY ME ─── */
-    .why-section {
-      padding: 4rem 5vw;
-      background: linear-gradient(160deg, #003366 0%, #005599 100%);
-    }
-    .why-section .section-label h2 { color: #fff; }
-    .why-section .section-label .eyebrow { color: var(--gold); }
-    .why-section .section-label p { color: rgba(255,255,255,0.7); }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .why-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 1.5rem 1.25rem;
-      text-align: center;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .why-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.12); }
-    .why-card .icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-    .why-card h4 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
-    .why-card p { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.55; }
-
-    /* ─── CONTACT / FLOATING WA ─── */
-    .wa-float {
-      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
-      background: #25D366; color: #fff;
-      border-radius: 50px;
-      display: flex; align-items: center; gap: 0.6rem;
-      padding: 0.7rem 1.2rem;
-      font-weight: 700; font-size: 0.88rem;
-      text-decoration: none;
-      box-shadow: 0 6px 24px rgba(37,211,102,0.45);
-      animation: pulse-wa 2.5s infinite;
-    }
-    .wa-float svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
-    @keyframes pulse-wa {
-      0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
-      50% { box-shadow: 0 6px 32px rgba(37,211,102,0.7); }
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--dark);
-      padding: 2rem 5vw;
-      text-align: center;
-    }
-    footer p { color: rgba(255,255,255,0.4); font-size: 0.78rem; line-height: 1.7; }
-    footer p strong { color: rgba(255,255,255,0.65); }
-    footer .disclaimer {
-      margin-top: 0.5rem;
-      font-size: 0.7rem; color: rgba(255,255,255,0.3);
-    }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ─── SCROLL HINT ─── */
-    .scroll-arrow {
-      margin-top: 2rem;
-      animation: bounce 2s infinite;
-      color: rgba(255,255,255,0.5);
-      font-size: 1.3rem;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%  { transform: translateY(6px); }
-    }
-
-    @media (max-width: 600px) {
-      .slide-content { padding: 1.75rem 1.5rem; }
-      .slide { min-height: 260px; }
-      nav { padding: 0 4vw; }
-      .hero { padding: 2.5rem 4vw 1.75rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK Magic Penapis Air — Agen Rasmi</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{--blue:#0057B8;--blue-dark:#003D8A;--blue-light:#E8F1FD;--accent:#00C2FF;--gold:#FFB800;--gray-50:#F8FAFC;--gray-100:#F1F5F9;--gray-200:#E2E8F0;--gray-700:#334155;--gray-900:#0F172A;--text:#1E293B;--radius:16px;--shadow-lg:0 12px 48px rgba(0,87,184,0.18);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--text);overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;padding:0 36px;height:64px;box-shadow:0 2px 12px rgba(0,87,184,0.07);}
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;color:var(--blue-dark);}
+.nav-brand .dot{width:10px;height:10px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(1.3);}}
+.nav-tag{background:var(--blue);color:#fff;font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:99px;}
+.nav-cta{background:var(--blue);color:#fff;border:none;padding:10px 22px;border-radius:99px;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;}
+/* HERO */
+.hero{position:relative;height:92vh;min-height:580px;overflow:hidden;background:#00091f;}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(100deg,rgba(0,9,31,0.88) 0%,rgba(0,25,70,0.55) 55%,transparent 100%);}
+.hero-content{position:absolute;inset:0;z-index:3;display:flex;align-items:center;padding:0 80px;}
+.hero-text{max-width:560px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,184,0,.15);border:1px solid var(--gold);color:var(--gold);font-size:.76rem;font-weight:700;padding:6px 16px;border-radius:99px;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px;animation:fadeUp .7s .1s both;}
+.hero-title{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;color:#fff;line-height:1.08;letter-spacing:-1.5px;margin-bottom:18px;animation:fadeUp .7s .2s both;}
+.hero-title span{color:var(--accent);}
+.hero-desc{font-size:1.02rem;color:rgba(255,255,255,.78);line-height:1.65;margin-bottom:36px;animation:fadeUp .7s .3s both;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s .4s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.btn-primary{background:var(--accent);color:var(--blue-dark);padding:14px 30px;border-radius:99px;font-weight:700;font-size:.95rem;text-decoration:none;transition:.2s;box-shadow:0 4px 20px rgba(0,194,255,.4);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,194,255,.55);}
+.btn-outline{border:2px solid rgba(255,255,255,.45);color:#fff;padding:14px 30px;border-radius:99px;font-weight:600;font-size:.95rem;text-decoration:none;}
+.hero-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:4;color:rgba(255,255,255,.4);font-size:.72rem;display:flex;flex-direction:column;align-items:center;gap:6px;letter-spacing:1px;}
+.scroll-arr{width:18px;height:18px;border-right:2px solid rgba(255,255,255,.35);border-bottom:2px solid rgba(255,255,255,.35);transform:rotate(45deg);animation:sb 1.5s infinite;}
+@keyframes sb{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(5px);}}
+/* STATS */
+.stats-strip{background:var(--blue-dark);display:flex;justify-content:center;flex-wrap:wrap;}
+.stat-item{flex:1;min-width:150px;display:flex;flex-direction:column;align-items:center;padding:20px 14px;border-right:1px solid rgba(255,255,255,.1);text-align:center;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;}
+.stat-label{font-size:.74rem;color:rgba(255,255,255,.6);margin-top:4px;}
+/* SHOWCASE */
+.showcase-section{background:linear-gradient(160deg,#00091f 0%,#001540 60%,#002060 100%);padding:90px 40px;position:relative;overflow:hidden;}
+.showcase-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,rgba(0,194,255,.07),transparent 70%);}
+.showcase-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 480px;gap:60px;align-items:center;position:relative;z-index:2;}
+.showcase-text .sl{font-size:.74rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.showcase-text h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-1px;margin-bottom:18px;}
+.showcase-text h2 span{color:var(--accent);}
+.showcase-text p{font-size:.95rem;color:rgba(255,255,255,.62);line-height:1.7;margin-bottom:32px;}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
+.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(0,194,255,.1);border:1px solid rgba(0,194,255,.25);color:rgba(255,255,255,.85);font-size:.8rem;padding:7px 14px;border-radius:99px;}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+#mcw{position:relative;width:100%;height:480px;cursor:grab;border-radius:24px;overflow:hidden;background:radial-gradient(ellipse at 50% 60%,rgba(0,87,184,.15),transparent 70%);}
+#mcw:active{cursor:grabbing;}
+#model-canvas{width:100%;height:100%;display:block;}
+.model-label{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,20,60,.75);backdrop-filter:blur(8px);border:1px solid rgba(0,194,255,.2);color:rgba(255,255,255,.65);font-size:.72rem;padding:6px 16px;border-radius:99px;white-space:nowrap;pointer-events:none;}
+.model-controls{display:flex;justify-content:center;gap:12px;margin-top:14px;}
+.model-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:.78rem;font-weight:600;font-family:inherit;padding:8px 18px;border-radius:99px;cursor:pointer;transition:.2s;}
+.model-btn:hover,.model-btn.active{background:var(--accent);color:var(--blue-dark);border-color:var(--accent);}
+/* TABLE */
+.compare-section{padding:90px 32px;max-width:1280px;margin:0 auto;}
+.section-label{text-align:center;font-size:.74rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.section-title{text-align:center;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;color:var(--gray-900);letter-spacing:-.8px;margin-bottom:12px;line-height:1.2;}
+.section-title span{color:var(--blue);}
+.section-sub{text-align:center;color:var(--gray-700);font-size:.95rem;max-width:560px;margin:0 auto 52px;line-height:1.65;}
+.compare-wrap{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);overflow-x:auto;border:1px solid var(--gray-200);}
+table{width:100%;border-collapse:collapse;min-width:960px;}
+thead tr{background:var(--blue-dark);}
+thead th{padding:0;position:relative;}
+.th-inner{padding:20px 13px 22px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;}
+.th-name{font-size:.86rem;font-weight:700;color:#fff;line-height:1.2;}
+.th-price{font-size:.71rem;color:rgba(255,255,255,.6);}
+.th-badge{font-size:.58rem;font-weight:800;padding:2px 8px;border-radius:99px;}
+thead th:first-child{background:#002266;text-align:left;}
+.th-fh{padding:18px 24px;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.62);}
+.popular-col{background:rgba(0,194,255,.08)!important;position:relative;}
+.popular-col::after{content:'';position:absolute;inset:0;border-left:2px solid var(--accent);border-right:2px solid var(--accent);pointer-events:none;}
+thead .popular-col{background:#004DB8!important;}
+thead .popular-col::before{content:'★ POPULAR';position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-50%);background:var(--accent);color:var(--blue-dark);font-size:.57rem;font-weight:800;padding:3px 10px;border-radius:99px;white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--gray-100);transition:.15s;}
+tbody tr:hover{background:var(--blue-light);}
+tr.gh td{background:var(--gray-100);padding:9px 24px;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);border-bottom:1px solid var(--gray-200)!important;}
+tbody td{padding:12px 13px;font-size:.84rem;text-align:center;color:var(--text);vertical-align:middle;}
+tbody td:first-child{text-align:left;padding-left:24px;font-weight:500;color:var(--gray-700);min-width:155px;}
+.ck{color:#22C55E;font-size:1.05rem;}
+.cx{color:#CBD5E1;}
+tr.ctar td{padding:18px 13px;border-bottom:none;}
+.cta-btn{display:inline-block;background:var(--blue);color:#fff;padding:9px 15px;border-radius:99px;font-size:.76rem;font-weight:700;text-decoration:none;transition:.2s;white-space:nowrap;}
+.cta-btn:hover{background:var(--blue-dark);}
+.cta-btn.acc{background:var(--accent);color:var(--blue-dark);box-shadow:0 4px 14px rgba(0,194,255,.35);}
+/* WHY */
+.why-section{background:linear-gradient(135deg,var(--blue-dark),#003D99);padding:90px 32px;}
+.why-inner{max-width:1100px;margin:0 auto;}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:52px;}
+.why-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:32px 24px;transition:.2s;}
+.why-card:hover{background:rgba(255,255,255,.11);transform:translateY(-4px);}
+.wi{font-size:2rem;margin-bottom:16px;display:block;}
+.why-card h3{font-size:.97rem;font-weight:700;color:#fff;margin-bottom:8px;}
+.why-card p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.65;}
+footer{background:var(--gray-900);color:rgba(255,255,255,.5);text-align:center;padding:32px;font-size:.82rem;}
+footer strong{color:#fff;}
+footer a{color:var(--accent);text-decoration:none;}
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:500;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(37,211,102,.45);text-decoration:none;font-size:1.6rem;animation:bounce 3s ease infinite;}
+@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-8px);}}
+.reveal{opacity:0;transform:translateY(28px);transition:.65s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@media(max-width:900px){.showcase-inner{grid-template-columns:1fr;}#mcw{height:350px;}.hero-content{padding:0 28px;}.compare-section{padding:60px 16px;}nav{padding:0 18px;}.nav-tag{display:none;}}
+</style>
 </head>
 <body>
+<nav>
+  <div class="nav-brand"><div class="dot"></div>SK Magic</div>
+  <span class="nav-tag">&#127474;&#127486; Agen Rasmi</span>
+  <a href="https://wa.me/60123456789" class="nav-cta">&#128242; Hubungi Agen</a>
+</nav>
 
-  <!-- NAVBAR -->
-  <nav>
-    <div class="nav-logo">SK<span>Magic</span> Agent</div>
-    <a class="nav-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20penapis%20air%20SK%20Magic" target="_blank">📲 Hubungi Saya</a>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-badge">✦ Agen Sah SK Magic Malaysia ✦</div>
-    <h1>Air Bersih &amp; Tulen<br>untuk <span>Keluarga Anda</span></h1>
-    <p>Teknologi JIK.SOO tanpa tangki — sentiasa segar, bebas bakteria &amp; penuh mineral. Lebih 5 tahun membantu keluarga Malaysia.</p>
-    <div class="hero-btns">
-      <a class="btn-primary" href="#compare">Bandingkan Model</a>
-      <a class="btn-outline" href="https://wa.me/60123456789" target="_blank">Tanya Agen</a>
+<div class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">&#9889; Promosi Istimewa 2025</div>
+      <h1 class="hero-title">Penapis Air <span>SK Magic</span><br>Teknologi Korea,<br>Tiada Tangki</h1>
+      <p class="hero-desc">JIKSOO — air bersih, bermineral, segar setiap masa. Bermula dari RM49/bln. Tiada deposit, pemasangan &amp; servis percuma seluruh Malaysia.</p>
+      <div class="hero-btns">
+        <a href="#bandingkan" class="btn-primary">Bandingkan 8 Model &rarr;</a>
+        <a href="https://wa.me/60123456789" class="btn-outline">Tanya Agen</a>
+      </div>
     </div>
-    <div class="scroll-arrow">↓</div>
-  </section>
-
-  <!-- TRUST BAR -->
-  <div class="trust-bar">
-    <div class="trust-item"><span class="icon">🛡️</span> Agen Rasmi Bertauliah</div>
-    <div class="trust-item"><span class="icon">🔧</span> Servis Percuma 5 Tahun</div>
-    <div class="trust-item"><span class="icon">💳</span> Tiada Deposit</div>
-    <div class="trust-item"><span class="icon">🚀</span> Pemasangan Percuma</div>
-    <div class="trust-item"><span class="icon">⭐</span> Jaminan 100% Puas Hati</div>
   </div>
+  <div class="hero-hint"><span>TATAL KE BAWAH</span><div class="scroll-arr"></div></div>
+</div>
 
-  <!-- ═══════════════════════════════
-       SEKSYEN 1: PROMOSI SLIDESHOW
-  ══════════════════════════════════ -->
-  <section class="promo-section" id="promosi">
-    <div class="section-label reveal">
-      <span class="eyebrow">🔥 Tawaran Eksklusif</span>
-      <h2>Promosi Semasa</h2>
-      <p>Dapatkan tawaran terbaik sebelum tamat tempoh. Hubungi saya sekarang untuk diskaun istimewa!</p>
+<div class="stats-strip">
+  <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Model Penapis Air</div></div>
+  <div class="stat-item"><div class="stat-num">RM49</div><div class="stat-label">Harga Bermula/bln</div></div>
+  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Tahun Servis Percuma</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Tiada Deposit</div></div>
+  <div class="stat-item"><div class="stat-num">&#127472;&#127479;</div><div class="stat-label">Teknologi Korea</div></div>
+</div>
+
+<div class="showcase-section">
+  <div class="showcase-inner">
+    <div class="showcase-text reveal">
+      <p class="sl">Teknologi JIKSOO</p>
+      <h2>Penapis Air <span>Ultra-Slim</span><br>Yang Tapis Segera</h2>
+      <p>Tiada tangki air — air ditapis terus dan keluar segar setiap masa. Sistem JIKSOO menggunakan 304 Stainless Steel Waterway dan UV Sterilisation untuk kebersihan maksimum.</p>
+      <div class="pills">
+        <div class="pill"><div class="pill-dot"></div>Tanpa Tangki</div>
+        <div class="pill"><div class="pill-dot"></div>UV Sterilisasi</div>
+        <div class="pill"><div class="pill-dot"></div>Air Bermineral</div>
+        <div class="pill"><div class="pill-dot"></div>Nano 3-Lapisan</div>
+        <div class="pill"><div class="pill-dot"></div>Sehingga 7 Suhu</div>
+        <div class="pill"><div class="pill-dot"></div>Jimat Elektrik 252%</div>
+      </div>
+      <a href="https://wa.me/60123456789" class="btn-primary">Dapatkan Demo Percuma &rarr;</a>
     </div>
-
-    <div class="slideshow-wrapper reveal">
-      <div class="slides" id="slides">
-
-        <!-- Slide 1 -->
-        <div class="slide slide-1">
-          <div class="slide-bg"></div>
-          <div class="slide-content">
-            <span class="slide-tag">🌟 Tawaran Terhad</span>
-            <h3>Daftar Sekarang,<br>Jimat Lebih!</h3>
-            <p>Rental bermula dari <strong style="color:#F5A623">RM79/bulan</strong> sahaja — termasuk servis, filter &amp; pemasangan percuma. Tanpa deposit!</p>
-            <a class="slide-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20promo%20rental%20SK%20Magic" target="_blank">Tanya Harga →</a>
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="slide slide-2">
-          <div class="slide-bg"></div>
-          <div class="slide-content">
-            <span class="slide-tag">🆓 Percuma</span>
-            <h3>Percuma Pemasangan +<br>Pendaftaran!</h3>
-            <p>Semua model SK Magic datang dengan pemasangan &amp; pendaftaran <strong style="color:#fff">100% PERCUMA</strong>. Tiada kos tersembunyi.</p>
-            <a class="slide-cta" href="https://wa.me/60123456789?text=Saya%20nak%20tahu%20lebih%20promo%20SK%20Magic" target="_blank">Daftar Sekarang →</a>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="slide slide-3">
-          <div class="slide-bg"></div>
-          <div class="slide-content">
-            <span class="slide-tag">🏠 Pakej Keluarga</span>
-            <h3>Pakej JIKSOO Rich —<br>Ais + Air Panas!</h3>
-            <p>Model premium dengan fungsi pembuat <strong style="color:#F5A623">AIK</strong> — air ais terus dari penapis. Sesuai untuk keluarga aktif!</p>
-            <a class="slide-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20JIKSOO%20Rich" target="_blank">Ketahui Lebih →</a>
-          </div>
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="slide slide-4">
-          <div class="slide-bg"></div>
-          <div class="slide-content">
-            <span class="slide-tag">🎁 Hadiah Istimewa</span>
-            <h3>Refer Rakan,<br>Dapat Baucer RM50!</h3>
-            <p>Jemput rakan atau ahli keluarga berdaftar &amp; anda akan dapat <strong style="color:#fff">baucer RM50</strong> sebagai tanda terima kasih!</p>
-            <a class="slide-cta" href="https://wa.me/60123456789?text=Saya%20nak%20refer%20rakan%20SK%20Magic" target="_blank">Kongsi Sekarang →</a>
-          </div>
-        </div>
-
-      </div><!-- /slides -->
-
-      <button class="slide-nav prev" id="prev" aria-label="Sebelumnya">&#8592;</button>
-      <button class="slide-nav next" id="next" aria-label="Seterusnya">&#8594;</button>
+    <div class="reveal">
+      <div id="mcw">
+        <canvas id="model-canvas"></canvas>
+        <div class="model-label">&#128433; Drag untuk putar model 3D</div>
+      </div>
+      <div class="model-controls">
+        <button class="model-btn active" onclick="setModel('jiksoo',this)">JIKSOO RIA</button>
+        <button class="model-btn" onclick="setModel('slim',this)">Wiz R</button>
+        <button class="model-btn" onclick="setModel('mini',this)">Mini</button>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="slide-dots" id="dots">
-      <div class="dot active" data-index="0"></div>
-      <div class="dot" data-index="1"></div>
-      <div class="dot" data-index="2"></div>
-      <div class="dot" data-index="3"></div>
-    </div>
+<div class="compare-section" id="bandingkan">
+  <div class="reveal">
+    <p class="section-label">Perbandingan Model</p>
+    <h2 class="section-title">Pilih Penapis Air <span>SK Magic</span><br>Yang Sesuai Untuk Anda</h2>
+    <p class="section-sub">8 model tersedia. Bandingkan ciri-ciri dan tentukan pilihan terbaik untuk keluarga anda.</p>
+  </div>
+  <div class="compare-wrap reveal">
+    <table>
+      <thead>
+        <tr>
+          <th><div class="th-fh">Ciri / Model</div></th>
+          <th class="popular-col"><div class="th-inner"><span class="th-name">JIKSOO<br>RIA</span><span class="th-price">RM59/bln</span><span class="th-badge" style="background:var(--gold);color:#002;">&#128465; Terbaru</span></div></th>
+          <th><div class="th-inner"><span class="th-name">JIKSOO<br>RIA S</span><span class="th-price">RM65/bln</span></div></th>
+          <th><div class="th-inner"><span class="th-name">RICH+</span><span class="th-price">RM145/bln</span><span class="th-badge" style="background:#6366f1;color:#fff;">&#129398; Ada Ais</span></div></th>
+          <th><div class="th-inner"><span class="th-name">JIKSOO<br>Hyper</span><span class="th-price">RM125/bln</span></div></th>
+          <th><div class="th-inner"><span class="th-name">Wiz R</span><span class="th-price">RM115/bln</span></div></th>
+          <th><div class="th-inner"><span class="th-name">Wiz S+</span><span class="th-price">RM110/bln</span></div></th>
+          <th><div class="th-inner"><span class="th-name">Mini<br>Merah</span><span class="th-price">RM79/bln</span></div></th>
+          <th><div class="th-inner"><span class="th-name">Mini<br>Putih</span><span class="th-price">RM79/bln</span></div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gh"><td colspan="9">&#128300; Teknologi Penapisan</td></tr>
+        <tr><td>Sistem JIKSOO (Tanpa Tangki)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>Penapisan Nano 3-Lapisan</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>Air Bermineral (Bukan RO)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>UV Sterilisasi</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr class="gh"><td colspan="9">&#127777;&#65039; Suhu Air</td></tr>
+        <tr><td>Bilangan Suhu</td><td class="popular-col"><b>5 Suhu</b></td><td><b>5 Suhu</b></td><td><b>7 Suhu + Ais</b></td><td><b>7 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td><td><b>3 Suhu</b></td></tr>
+        <tr><td>Air Sejuk (10&deg;C)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>Suhu Bayi / Suam (50&deg;C)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
+        <tr><td>Air Panas (90&deg;C)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>Pembuat Ais</td><td class="popular-col"><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
+        <tr class="gh"><td colspan="9">&#128208; Saiz &amp; Reka Bentuk</td></tr>
+        <tr><td>Countertop (Atas Meja)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>Standing (Lantai)</td><td class="popular-col"><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td></tr>
+        <tr><td>Ultra Slim (&le;21cm lebar)</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr class="gh"><td colspan="9">&#128295; Servis &amp; Faedah</td></tr>
+        <tr><td>Servis Percuma</td><td class="popular-col">5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td><td>5 Tahun</td></tr>
+        <tr><td>Tukar Alat Ganti / 12 Bln</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>Kunci Kanak-kanak</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="cx">&#8212;</span></td><td><span class="cx">&#8212;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr><td>Pemasangan Percuma</td><td class="popular-col"><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td><td><span class="ck">&#10003;</span></td></tr>
+        <tr class="gh"><td colspan="9">&#128106; Paling Sesuai Untuk</td></tr>
+        <tr><td>Sesuai Untuk</td>
+          <td class="popular-col" style="font-size:.77rem;color:#0057B8;font-weight:600;">Keluarga baru / Budget bijak</td>
+          <td style="font-size:.77rem;">Keluarga ramai / Lebih suhu</td>
+          <td style="font-size:.77rem;">Peminat ais &amp; premium</td>
+          <td style="font-size:.77rem;">Pengguna aktif / Office</td>
+          <td style="font-size:.77rem;">Dapur kecil / Sewa</td>
+          <td style="font-size:.77rem;">Ruang luas / Standing</td>
+          <td style="font-size:.77rem;">Studio / Bilik</td>
+          <td style="font-size:.77rem;">Studio / Hadiah</td>
+        </tr>
+        <tr class="ctar">
+          <td style="font-weight:700;font-size:.84rem;color:#0057B8;">&#128242; Tanya Agen</td>
+          <td class="popular-col"><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20RIA" class="cta-btn acc">Tanya Sekarang</a></td>
+          <td><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20RIA%20S" class="cta-btn">Tanya Sekarang</a></td>
+          <td><a href="https://wa.me/60123456789?text=Minat%20RICH+" class="cta-btn">Tanya Sekarang</a></td>
+          <td><a href="https://wa.me/60123456789?text=Minat%20JIKSOO%20Hyper" class="cta-btn">Tanya Sekarang</a></td>
+          <td><a href="https://wa.me/60123456789?text=Minat%20Wiz%20R" class="cta-btn">Tanya Sekarang</a></td>
+          <td><a href="https://wa.me/60123456789?text=Minat%20Wiz%20S+" class="cta-btn">Tanya Sekarang</a></td>
+          <td><a href="https://wa.me/60123456789?text=Minat%20Mini%20Merah" class="cta-btn">Tanya Sekarang</a></td>
+          <td><a href="https://wa.me/60123456789?text=Minat%20Mini%20Putih" class="cta-btn">Tanya Sekarang</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="text-align:center;font-size:.77rem;color:#94A3B8;margin-top:16px;">* Harga sewa adalah anggaran promosi semasa. Hubungi agen untuk harga terkini.</p>
+</div>
 
-    <div class="promo-note">
-      ⏰ Promosi tertakluk kepada perubahan. Hubungi agen untuk harga terkini. <strong>Stok terhad!</strong>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════
-       SEKSYEN 2: PERBANDINGAN PRODUK
-  ══════════════════════════════════ -->
-  <section class="compare-section" id="compare">
-    <div class="section-label reveal">
-      <span class="eyebrow">📊 Perbandingan Produk</span>
-      <h2>Pilih Model Yang Sesuai</h2>
-      <p>8 model penapis air SK Magic untuk setiap keperluan — rumah, pejabat &amp; komersial.</p>
-    </div>
-
-    <div class="compare-wrapper reveal">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th style="width:200px; text-align:left;">Ciri-ciri</th>
-            <th>
-              <div class="plan-header-cell">
-                <span class="plan-name">JIKSOO Mini</span>
-                <span class="plan-type">Paling Kecil</span>
-                <span class="plan-price">~RM79<span>/bln</span></span>
-              </div>
-            </th>
-            <th>
-              <div class="plan-header-cell">
-                <span class="plan-name">JIKSOO Rapi</span>
-                <span class="plan-type">Kompak</span>
-                <span class="plan-price">~RM110<span>/bln</span></span>
-              </div>
-            </th>
-            <th>
-              <div class="plan-header-cell featured">
-                <span class="badge-popular">⭐ Popular</span>
-                <span class="plan-name">JIKSOO Hyper</span>
-                <span class="plan-type">Paling Laris</span>
-                <span class="plan-price">~RM125<span>/bln</span></span>
-              </div>
-            </th>
-            <th>
-              <div class="plan-header-cell">
-                <span class="plan-name">JIKSOO Rich</span>
-                <span class="plan-type">Dengan Ais</span>
-                <span class="plan-price">~RM180<span>/bln</span></span>
-              </div>
-            </th>
-            <th>
-              <div class="plan-header-cell">
-                <span class="plan-name">JIKSOO Rich+</span>
-                <span class="plan-type">Premium Ais</span>
-                <span class="plan-price">~RM195<span>/bln</span></span>
-              </div>
-            </th>
-            <th>
-              <div class="plan-header-cell">
-                <span class="plan-name">WIZ C</span>
-                <span class="plan-type">Countertop</span>
-                <span class="plan-price">~RM115<span>/bln</span></span>
-              </div>
-            </th>
-            <th>
-              <div class="plan-header-cell">
-                <span class="plan-name">WIZ S</span>
-                <span class="plan-type">Standing</span>
-                <span class="plan-price">~RM120<span>/bln</span></span>
-              </div>
-            </th>
-            <th>
-              <div class="plan-header-cell">
-                <span class="plan-name">WIZ R</span>
-                <span class="plan-type">Pejabat</span>
-                <span class="plan-price">~RM125<span>/bln</span></span>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <!-- KATEGORI: REKA BENTUK -->
-          <tr class="category-row">
-            <td colspan="9">REKA BENTUK & SAIZ</td>
-          </tr>
-          <tr>
-            <td>Sistem<span class="row-label-group">Jenis Penapis</span></td>
-            <td>Tankless</td>
-            <td>Tankless</td>
-            <td class="feat-col">Tankless</td>
-            <td>Tankless</td>
-            <td>Tankless</td>
-            <td>Bertangki</td>
-            <td>Bertangki</td>
-            <td>Bertangki</td>
-          </tr>
-          <tr>
-            <td>Lebar Mesin<span class="row-label-group">cm</span></td>
-            <td>9.2 cm</td>
-            <td>9.2 cm</td>
-            <td class="feat-col">17 cm</td>
-            <td>17 cm</td>
-            <td>17 cm</td>
-            <td>21 cm</td>
-            <td>Standing</td>
-            <td>Standing</td>
-          </tr>
-          <tr>
-            <td>Sesuai untuk<span class="row-label-group">Lokasi</span></td>
-            <td>Kaunter kecil</td>
-            <td>Dapur rumah</td>
-            <td class="feat-col">Rumah/pejabat</td>
-            <td>Rumah</td>
-            <td>Rumah mewah</td>
-            <td>Pejabat kecil</td>
-            <td>Pejabat</td>
-            <td>Pejabat besar</td>
-          </tr>
-
-          <!-- KATEGORI: SUHU -->
-          <tr class="category-row">
-            <td colspan="9">PILIHAN SUHU AIR</td>
-          </tr>
-          <tr>
-            <td>Bilangan Suhu</td>
-            <td>3</td>
-            <td>4</td>
-            <td class="feat-col">7</td>
-            <td>7</td>
-            <td>7</td>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>Air Sejuk 10°C</td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-          </tr>
-          <tr>
-            <td>Air Panas 85°–95°</td>
-            <td><span class="cross">—</span></td>
-            <td><span class="check">✔</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-          </tr>
-          <tr>
-            <td>Suhu Susu Bayi</td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-          </tr>
-          <tr>
-            <td>Pembuat Ais 🧊</td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-            <td class="feat-col"><span class="cross">—</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-          </tr>
-
-          <!-- KATEGORI: TEKNOLOGI -->
-          <tr class="category-row">
-            <td colspan="9">TEKNOLOGI & KESELAMATAN</td>
-          </tr>
-          <tr>
-            <td>UV Sterilisasi</td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-          </tr>
-          <tr>
-            <td>Nano Filter</td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-          </tr>
-          <tr>
-            <td>IoT / WiFi App</td>
-            <td><span class="check">✔</span></td>
-            <td><span class="cross">—</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
-          </tr>
-          <tr>
-            <td>Penguncian Kanak-kanak</td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-          </tr>
-          <tr>
-            <td>Saluran Keluli Tahan Karat</td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="partial">Tangki SS</span></td>
-            <td><span class="partial">Tangki SS</span></td>
-            <td><span class="partial">Tangki SS</span></td>
-          </tr>
-
-          <!-- KATEGORI: SERVIS -->
-          <tr class="category-row">
-            <td colspan="9">PAKEJ SERVIS</td>
-          </tr>
-          <tr>
-            <td>Servis Setiap<span class="row-label-group">Kekerapan</span></td>
-            <td>4 bulan</td>
-            <td>4 bulan</td>
-            <td class="feat-col">4 bulan</td>
-            <td>4 bulan</td>
-            <td>4 bulan</td>
-            <td>4 bulan</td>
-            <td>4 bulan</td>
-            <td>4 bulan</td>
-          </tr>
-          <tr>
-            <td>Ganti Bahagian Percuma</td>
-            <td><span class="partial">4 bahagian/thn</span></td>
-            <td><span class="partial">4 bahagian/thn</span></td>
-            <td class="feat-col"><span class="partial">4 bahagian/thn</span></td>
-            <td><span class="partial">4 bahagian/thn</span></td>
-            <td><span class="partial">4 bahagian/thn</span></td>
-            <td><span class="partial">4 bahagian/thn</span></td>
-            <td><span class="partial">4 bahagian/thn</span></td>
-            <td><span class="partial">4 bahagian/thn</span></td>
-          </tr>
-          <tr>
-            <td>Pemasangan Percuma</td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td class="feat-col"><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-            <td><span class="check">✔</span></td>
-          </tr>
-
-          <!-- CTA ROW -->
-          <tr class="cta-row">
-            <td style="font-size:0.8rem; color:var(--muted); border-bottom:1px solid var(--border);">Hubungi saya →</td>
-            <td><a class="table-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20JIKSOO%20Mini" target="_blank">Pilih</a></td>
-            <td><a class="table-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20JIKSOO%20Rapi" target="_blank">Pilih</a></td>
-            <td class="feat-col"><a class="table-cta featured-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20JIKSOO%20Hyper" target="_blank">Pilih ⭐</a></td>
-            <td><a class="table-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20JIKSOO%20Rich" target="_blank">Pilih</a></td>
-            <td><a class="table-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20JIKSOO%20Rich+" target="_blank">Pilih</a></td>
-            <td><a class="table-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20WIZ%20C" target="_blank">Pilih</a></td>
-            <td><a class="table-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20WIZ%20S" target="_blank">Pilih</a></td>
-            <td><a class="table-cta" href="https://wa.me/60123456789?text=Saya%20berminat%20WIZ%20R" target="_blank">Pilih</a></td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-
-    <p style="text-align:center; color:var(--muted); font-size:0.78rem; margin-top:1.5rem;">
-      * Harga adalah anggaran semasa. Hubungi agen untuk harga &amp; promosi terkini.
-    </p>
-  </section>
-
-  <!-- ─── WHY ME ─── -->
-  <section class="why-section">
-    <div class="section-label">
-      <span class="eyebrow">✦ Kenapa Pilih Saya</span>
-      <h2>Agen Amanah, Servis Ikhlas</h2>
-      <p>Saya komited untuk memastikan setiap pelanggan mendapat pengalaman terbaik bersama SK Magic.</p>
+<div class="why-section">
+  <div class="why-inner">
+    <div class="reveal">
+      <p class="section-label" style="color:var(--accent);">Kenapa SK Magic?</p>
+      <h2 class="section-title" style="color:#fff;">Anak Syarikat SK Group Korea &mdash;<br>Fortune 500 Global</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.65);">Bukan syarikat biasa. SK Group ialah konglomerat Fortune 500 dari Korea yang menguasai minyak &amp; gas, telekomunikasi dan teknologi dunia.</p>
     </div>
     <div class="why-grid">
-      <div class="why-card">
-        <span class="icon">🏅</span>
-        <h4>Agen Bertauliah</h4>
-        <p>Agen rasmi berdaftar terus dengan SK Magic Malaysia Sdn Bhd.</p>
-      </div>
-      <div class="why-card">
-        <span class="icon">⚡</span>
-        <h4>Respon Pantas</h4>
-        <p>Balas pertanyaan dalam masa 1 jam. Proses pendaftaran dalam 24 jam.</p>
-      </div>
-      <div class="why-card">
-        <span class="icon">🔧</span>
-        <h4>Selepas Jualan</h4>
-        <p>Saya pantau servis &amp; aduan pelanggan sehingga selesai.</p>
-      </div>
-      <div class="why-card">
-        <span class="icon">💬</span>
-        <h4>Khidmat Nasihat</h4>
-        <p>Bantu pilih model yang benar-benar sesuai dengan keperluan &amp; bajet anda.</p>
-      </div>
+      <div class="why-card reveal"><span class="wi">&#128683;&#129440;</span><h3>Tiada Tangki = Tiada Bakteria</h3><p>Air tidak bertakung. Risiko biofilm, alga dan legionella hampir sifar berbanding penapis konvensional.</p></div>
+      <div class="why-card reveal"><span class="wi">&#128142;</span><h3>Air Bermineral, Bukan RO</h3><p>SK Magic hanya tapis kotoran — mineral penting kekal dalam air. Lebih sihat daripada air RO.</p></div>
+      <div class="why-card reveal"><span class="wi">&#128300;</span><h3>UV Self-Sterilisation</h3><p>Lampu UV membunuh bakteria secara automatik di kawasan paip air — lebih bersih tanpa usaha.</p></div>
+      <div class="why-card reveal"><span class="wi">&#128295;</span><h3>Servis &amp; Alat Ganti Percuma</h3><p>Setiap 12 bulan juruteknik datang tukar 4 komponen percuma. Macam baru setiap tahun!</p></div>
+      <div class="why-card reveal"><span class="wi">&#9889;</span><h3>Jimat Elektrik 252%</h3><p>Sistem haba serta-merta hanya guna elektrik ketika air keluar — jimat berbanding model tangki.</p></div>
+      <div class="why-card reveal"><span class="wi">&#127758;</span><h3>Servis Seluruh Malaysia</h3><p>Pemasangan dan penghantaran percuma ke seluruh Malaysia. Tim juruteknik terlatih sedia membantu.</p></div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p><strong>Agen SK Magic Bertauliah</strong> — Sungai Petani, Kedah</p>
-    <p>📲 WhatsApp: <a href="https://wa.me/60123456789" style="color:rgba(255,255,255,0.55);">+60 12-345 6789</a></p>
-    <p class="disclaimer">Laman web ini dimiliki sepenuhnya oleh agen bebas SK Magic. Bukan laman web rasmi SK Magic Malaysia Sdn Bhd (1288516-M). Harga &amp; promosi tertakluk kepada perubahan tanpa notis.</p>
-  </footer>
+<footer>
+  <p style="margin-bottom:8px;"><strong>SK Magic &mdash; Agen Rasmi Malaysia</strong></p>
+  <p>Hubungi agen: <a href="https://wa.me/60123456789">&#128242; WhatsApp Sekarang</a></p>
+  <p style="margin-top:12px;font-size:.74rem;">&copy; 2025 Laman web ini dikendalikan oleh agen bebas SK Magic yang berlesen. Bukan laman web rasmi SK Magic Malaysia.</p>
+</footer>
 
-  <!-- FLOATING WHATSAPP -->
-  <a class="wa-float" href="https://wa.me/60123456789?text=Saya%20berminat%20dengan%20penapis%20air%20SK%20Magic" target="_blank">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-    WhatsApp Agen
-  </a>
+<a href="https://wa.me/60123456789?text=Saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20SK%20Magic" class="wa-float">&#128172;</a>
 
-  <script>
-    // ── SLIDESHOW ──
-    const slides = document.getElementById('slides');
-    const dots = document.querySelectorAll('.dot');
-    let current = 0;
-    const total = 4;
-    let timer;
+<script>
+// ================================================================
+//  UTILITY: build purifier geometry
+// ================================================================
+function buildPurifier(cfg){
+  var g=new THREE.Group();
+  var W=cfg.w||0.56,H=cfg.h||2.9,D=cfg.d||0.56;
+  var bMat=new THREE.MeshPhysicalMaterial({color:cfg.color,metalness:cfg.m||.72,roughness:cfg.r||.14,envMapIntensity:1.4});
+  var aMat=new THREE.MeshPhysicalMaterial({color:0x00C2FF,metalness:.95,roughness:.04,emissive:0x004466,emissiveIntensity:.55});
+  var dMat=new THREE.MeshPhysicalMaterial({color:0x060e1c,metalness:.85,roughness:.2});
+  var lMat=new THREE.MeshPhysicalMaterial({color:0x00C2FF,emissive:0x00C2FF,emissiveIntensity:3,metalness:.9,roughness:.03});
+  var sMat=new THREE.MeshPhysicalMaterial({color:0x0044AA,emissive:0x0033AA,emissiveIntensity:1.5,transparent:true,opacity:.9});
+  // Body
+  var body=new THREE.Mesh(new THREE.BoxGeometry(W,H,D,2,6,2),bMat);
+  body.castShadow=true; g.add(body);
+  // Top cap
+  var cap=new THREE.Mesh(new THREE.CylinderGeometry(W/2*.88,W/2*.88,.1,32),aMat);
+  cap.position.y=H/2+.04; g.add(cap);
+  // Antenna
+  var ant=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,.22,16),aMat);
+  ant.position.y=H/2+.16; g.add(ant);
+  var antT=new THREE.Mesh(new THREE.SphereGeometry(.048,16,16),new THREE.MeshPhysicalMaterial({color:0x00C2FF,emissive:0x00AAFF,emissiveIntensity:2.2}));
+  antT.position.y=H/2+.29; g.add(antT);
+  // Screen panel
+  var pan=new THREE.Mesh(new THREE.BoxGeometry(W*.78,H*.24,.04),dMat);
+  pan.position.set(0,H*.12,D/2+.02); g.add(pan);
+  var scr=new THREE.Mesh(new THREE.BoxGeometry(W*.62,H*.17,.01),sMat);
+  scr.position.set(0,H*.12,D/2+.045); g.add(scr);
+  // Screen lines
+  for(var i=0;i<3;i++){
+    var ln=new THREE.Mesh(new THREE.BoxGeometry(W*.48,.009,.004),new THREE.MeshBasicMaterial({color:0x44DDFF,transparent:true,opacity:.7}));
+    ln.position.set(0,H*.17-i*.038,D/2+.052); g.add(ln);
+  }
+  // LED vertical strips
+  var lv=new THREE.Mesh(new THREE.BoxGeometry(.022,H*.52,.013),lMat);
+  lv.position.set(W/2-.038,-H*.05,D/2+.003); g.add(lv);
+  var lv2=lv.clone(); lv2.position.x=-W/2+.038; g.add(lv2);
+  // Horizontal accent rings
+  for(var j=0;j<5;j++){
+    var hr=new THREE.Mesh(new THREE.BoxGeometry(W*.92,.018,D+.008),
+      new THREE.MeshPhysicalMaterial({color:0x00C2FF,emissive:0x00C2FF,emissiveIntensity:.9,metalness:.8,roughness:.12}));
+    hr.position.y=-H*.3+j*.2; g.add(hr);
+  }
+  // Nozzle
+  var arm=new THREE.Mesh(new THREE.BoxGeometry(.15,.11,D*.5),dMat);
+  arm.position.set(0,-H*.22,D/2+.045); g.add(arm);
+  var nz=new THREE.Mesh(new THREE.CylinderGeometry(.038,.05,.26,20),aMat);
+  nz.position.set(0,-H*.34,D/2+.15); nz.rotation.x=Math.PI/5; g.add(nz);
+  // Water drip
+  var drip=new THREE.Mesh(new THREE.SphereGeometry(.038,12,12),
+    new THREE.MeshPhysicalMaterial({color:0x66CCFF,transparent:true,opacity:.7,roughness:.08}));
+  drip.position.set(0,-H*.46,D/2+.21); drip.userData.drip=true; g.add(drip);
+  // Filter window (glass)
+  var win=new THREE.Mesh(new THREE.BoxGeometry(W*.6,H*.28,.018),
+    new THREE.MeshPhysicalMaterial({color:0x1a3a6a,transparent:true,opacity:.3,roughness:.05}));
+  win.position.set(0,-H*.06,D/2+.009); g.add(win);
+  // Cartridges
+  var cc=[0x3377BB,0x44AA77,0xBB8833];
+  for(var k=0;k<3;k++){
+    var cart=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,H*.22,16),
+      new THREE.MeshPhysicalMaterial({color:cc[k],metalness:.3,roughness:.4,transparent:true,opacity:.6}));
+    cart.position.set((k-1)*.11,-H*.06,D/2-.055); g.add(cart);
+  }
+  // Base
+  var base=new THREE.Mesh(new THREE.BoxGeometry(W*1.18,.1,D*1.18),dMat);
+  base.position.y=-H/2-.05; base.castShadow=true; base.receiveShadow=true; g.add(base);
+  // Feet
+  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(function(f){
+    var ft=new THREE.Mesh(new THREE.CylinderGeometry(.038,.046,.055,12),
+      new THREE.MeshPhysicalMaterial({color:0x111111}));
+    ft.position.set(f[0]*W*.38,-H/2-.13,f[1]*D*.38); g.add(ft);
+  });
+  return g;
+}
 
-    function goTo(n) {
-      current = (n + total) % total;
-      slides.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+// ================================================================
+//  HERO 3D BACKGROUND
+// ================================================================
+(function(){
+  var canvas=document.getElementById('hero-canvas');
+  var hero=canvas.parentElement;
+  var W=hero.offsetWidth, H=hero.offsetHeight;
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(W,H);
+  renderer.shadowMap.enabled=true;
+  var scene=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(52,W/H,.1,200);
+  cam.position.set(3,1,11); cam.lookAt(0,0,0);
+  // Lights
+  scene.add(new THREE.AmbientLight(0x112244,1.3));
+  var dl=new THREE.DirectionalLight(0x00C2FF,3.5); dl.position.set(5,10,8); dl.castShadow=true; scene.add(dl);
+  var rl=new THREE.PointLight(0x0057B8,4,30); rl.position.set(-6,3,2); scene.add(rl);
+  var gl=new THREE.PointLight(0x00C2FF,2,20); gl.position.set(0,0,5); scene.add(gl);
+  // Grid floor
+  var grid=new THREE.GridHelper(30,40,0x001a4d,0x001a4d);
+  grid.position.y=-1.6; grid.material.opacity=.3; grid.material.transparent=true; scene.add(grid);
+  // Floor plane
+  var flr=new THREE.Mesh(new THREE.PlaneGeometry(30,30),
+    new THREE.MeshPhysicalMaterial({color:0x000c28,metalness:.8,roughness:.7,transparent:true,opacity:.65}));
+  flr.rotation.x=-Math.PI/2; flr.position.y=-1.6; flr.receiveShadow=true; scene.add(flr);
+  // Purifiers
+  var p1=buildPurifier({w:.52,h:2.8,d:.52,color:0xC0D0E8,m:.73,r:.12});
+  p1.position.set(3.5,0,0); p1.rotation.y=-.4; scene.add(p1);
+  var p2=buildPurifier({w:.45,h:2.4,d:.45,color:0x8090AA,m:.65,r:.22});
+  p2.position.set(5.2,-.3,.5); p2.rotation.y=.25; scene.add(p2);
+  var p3=buildPurifier({w:.38,h:2.0,d:.38,color:0x1a2a4a,m:.9,r:.08});
+  p3.position.set(2.0,-.7,-1); p3.rotation.y=.65; scene.add(p3);
+  // Glow ring
+  var rg=new THREE.Mesh(new THREE.RingGeometry(.3,.36,48),
+    new THREE.MeshBasicMaterial({color:0x00C2FF,transparent:true,opacity:.3,side:THREE.DoubleSide}));
+  rg.rotation.x=-Math.PI/2; rg.position.set(3.5,-1.45,0); scene.add(rg);
+  // Particles
+  var dpg=new THREE.SphereGeometry(.038,8,8);
+  var dpm=new THREE.MeshPhysicalMaterial({color:0x00C2FF,transparent:true,opacity:.55,roughness:.06});
+  var drops=[];
+  for(var i=0;i<55;i++){
+    var d=new THREE.Mesh(dpg,dpm);
+    d.position.set((Math.random()-.5)*13,(Math.random()-.5)*8,(Math.random()-.5)*6-2);
+    d.userData={spd:.004+Math.random()*.008,ph:Math.random()*Math.PI*2};
+    scene.add(d); drops.push(d);
+  }
+  var t=0;
+  function anim(){
+    requestAnimationFrame(anim); t+=.01;
+    p1.position.y=Math.sin(t*.7)*.08; p1.rotation.y=-.4+Math.sin(t*.3)*.05;
+    p2.position.y=-.3+Math.sin(t*.5+1)*.07;
+    p3.position.y=-.7+Math.sin(t*.6+2)*.07;
+    rg.scale.x=1+Math.sin(t*1.2)*.08; rg.scale.z=1+Math.sin(t*1.2)*.08;
+    rg.material.opacity=.15+Math.sin(t*1.2)*.1;
+    drops.forEach(function(d){
+      d.position.y-=d.userData.spd;
+      d.position.x+=Math.sin(t+d.userData.ph)*.002;
+      if(d.position.y<-5) d.position.y=5;
+    });
+    cam.position.y=1+Math.sin(t*.2)*.15;
+    gl.intensity=2+Math.sin(t*1.8)*.8;
+    renderer.render(scene,cam);
+  }
+  anim();
+  window.addEventListener('resize',function(){
+    var W2=hero.offsetWidth,H2=hero.offsetHeight;
+    cam.aspect=W2/H2; cam.updateProjectionMatrix(); renderer.setSize(W2,H2);
+  });
+})();
+
+// ================================================================
+//  MODEL VIEWER — Interactive
+// ================================================================
+(function(){
+  var canvas=document.getElementById('model-canvas');
+  var wrap=document.getElementById('mcw');
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(wrap.offsetWidth,wrap.offsetHeight);
+  renderer.shadowMap.enabled=true;
+  var scene=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(42,wrap.offsetWidth/wrap.offsetHeight,.1,100);
+  cam.position.set(0,.5,5.5); cam.lookAt(0,0,0);
+  // Lights
+  scene.add(new THREE.AmbientLight(0x223355,2.2));
+  var kl=new THREE.DirectionalLight(0xffffff,4); kl.position.set(5,8,6); kl.castShadow=true; scene.add(kl);
+  var fl=new THREE.PointLight(0x00C2FF,5,20); fl.position.set(-4,2,3); scene.add(fl);
+  scene.add(new THREE.PointLight(0x0057B8,3,15)).position.set(0,-3,-5);
+  scene.add(new THREE.PointLight(0xffffff,2,10)).position.set(0,6,0);
+  // Env sphere
+  var es=new THREE.Mesh(new THREE.SphereGeometry(40,16,16),
+    new THREE.MeshBasicMaterial({color:0x001030,side:THREE.BackSide})); scene.add(es);
+  // Floor
+  var flrM=new THREE.Mesh(new THREE.CircleGeometry(2.5,64),
+    new THREE.MeshPhysicalMaterial({color:0x000d20,metalness:.7,roughness:.6,transparent:true,opacity:.6}));
+  flrM.rotation.x=-Math.PI/2; flrM.position.y=-1.65; flrM.receiveShadow=true; scene.add(flrM);
+  // Glow ring floor
+  var gr=new THREE.Mesh(new THREE.RingGeometry(1.0,1.12,64),
+    new THREE.MeshBasicMaterial({color:0x00C2FF,transparent:true,opacity:.32,side:THREE.DoubleSide}));
+  gr.rotation.x=-Math.PI/2; gr.position.y=-1.63; scene.add(gr);
+
+  var mg=new THREE.Group(); scene.add(mg);
+  var curKey='jiksoo';
+  var cfgs={
+    jiksoo:{w:.58,h:3.0,d:.58,color:0xC5D5E8,m:.72,r:.13},
+    slim:  {w:.5, h:2.6,d:.5, color:0x8899AA,m:.65,r:.2},
+    mini:  {w:.44,h:2.0,d:.44,color:0xDD3333,m:.62,r:.24}
+  };
+
+  function loadModel(key){
+    while(mg.children.length) mg.remove(mg.children[0]);
+    curKey=key;
+    var m=buildPurifier(cfgs[key]); mg.add(m);
+    // viewer particles
+    var dg=new THREE.SphereGeometry(.028,6,6);
+    var dm=new THREE.MeshPhysicalMaterial({color:0x66DDFF,transparent:true,opacity:.5,roughness:.1});
+    for(var i=0;i<18;i++){
+      var dp=new THREE.Mesh(dg,dm);
+      dp.position.set((Math.random()-.5)*3,(Math.random()-.5)*4,(Math.random()-.5)*2);
+      dp.userData={vy:-.011-.009*Math.random(),ph:Math.random()*Math.PI*2};
+      mg.add(dp);
     }
+  }
 
-    function next() { goTo(current + 1); }
-    function prev() { goTo(current - 1); }
+  window.setModel=function(key,btn){
+    loadModel(key);
+    document.querySelectorAll('.model-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+  };
+  loadModel('jiksoo');
 
-    document.getElementById('next').addEventListener('click', () => { next(); resetTimer(); });
-    document.getElementById('prev').addEventListener('click', () => { prev(); resetTimer(); });
-    dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.index); resetTimer(); }));
+  var isDrag=false,lastX=0,lastY=0,rotY=.3,rotX=.08,autoR=true;
+  wrap.addEventListener('mousedown',function(e){isDrag=true;lastX=e.clientX;lastY=e.clientY;autoR=false;});
+  wrap.addEventListener('touchstart',function(e){isDrag=true;lastX=e.touches[0].clientX;lastY=e.touches[0].clientY;autoR=false;});
+  window.addEventListener('mouseup',function(){isDrag=false;setTimeout(function(){autoR=true;},2000);});
+  window.addEventListener('touchend',function(){isDrag=false;setTimeout(function(){autoR=true;},2000);});
+  window.addEventListener('mousemove',function(e){
+    if(!isDrag)return;
+    rotY+=(e.clientX-lastX)*.012; rotX+=(e.clientY-lastY)*.006;
+    rotX=Math.max(-.5,Math.min(.5,rotX)); lastX=e.clientX; lastY=e.clientY;
+  });
+  window.addEventListener('touchmove',function(e){
+    if(!isDrag)return;
+    rotY+=(e.touches[0].clientX-lastX)*.012; rotX+=(e.touches[0].clientY-lastY)*.006;
+    rotX=Math.max(-.5,Math.min(.5,rotX)); lastX=e.touches[0].clientX; lastY=e.touches[0].clientY;
+  });
 
-    function resetTimer() { clearInterval(timer); timer = setInterval(next, 5000); }
-    timer = setInterval(next, 5000);
+  var t2=0;
+  function animM(){
+    requestAnimationFrame(animM); t2+=.015;
+    if(autoR) rotY+=.009;
+    mg.rotation.y=rotY; mg.rotation.x=rotX;
+    mg.position.y=Math.sin(t2*.6)*.09;
+    mg.traverse(function(o){
+      if(o.userData&&o.userData.drip){
+        o.position.y-=.005; o.scale.y=.8+Math.abs(Math.sin(t2*2))*.4;
+        if(o.position.y<-2.6) o.position.y=cfgs[curKey].h*.5;
+      }
+      if(o.userData&&o.userData.vy!==undefined){
+        o.position.y+=o.userData.vy;
+        o.position.x+=Math.sin(t2+o.userData.ph)*.003;
+        if(o.position.y<-2.6) o.position.y=2.6;
+      }
+    });
+    gr.material.opacity=.22+Math.sin(t2*1.5)*.14;
+    gr.scale.x=1+Math.sin(t2*1.2)*.06; gr.scale.z=1+Math.sin(t2*1.2)*.06;
+    fl.intensity=4+Math.sin(t2*1.8)*1.5;
+    renderer.render(scene,cam);
+  }
+  animM();
+  window.addEventListener('resize',function(){
+    var W2=wrap.offsetWidth,H2=wrap.offsetHeight;
+    cam.aspect=W2/H2; cam.updateProjectionMatrix(); renderer.setSize(W2,H2);
+  });
+})();
 
-    // Touch swipe
-    let startX = 0;
-    slides.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
-    slides.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); resetTimer(); }
-    }, { passive: true });
-
-    // ── REVEAL ON SCROLL ──
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.15 });
-    reveals.forEach(r => observer.observe(r));
-  </script>
+// Scroll reveal
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*90);});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
 </body>
 </html>
